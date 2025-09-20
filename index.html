@@ -12,11 +12,22 @@
       font-family: 'Arial', sans-serif;
     }
     body {
-      background: #ffffff;
-      color: #111;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      background: linear-gradient(-45deg, #d60000, #000000, #ffffff, #111111);
+      background-size: 400% 400%;
+      animation: flowBG 15s ease infinite;
+      color: #111;
+    }
+    @keyframes flowBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(214, 0, 0, 0.5);
     }
     /* Navbar */
     .navbar {
@@ -42,16 +53,9 @@
       font-size: 15px;
       transition: color 0.3s;
     }
-    .nav-left a:hover {
-      color: #d60000;
-    }
-    .nav-logo img {
-      height: 35px;
-    }
-    .nav-right {
-      display: flex;
-      gap: 12px;
-    }
+    .nav-left a:hover { color: #d60000; }
+    .nav-logo img { height: 35px; }
+    .nav-right { display: flex; gap: 12px; }
     .nav-right a {
       padding: 8px 18px;
       border-radius: 8px;
@@ -74,9 +78,7 @@
       background-color: #d60000;
       color: #fff;
     }
-    .signup-btn:hover {
-      background-color: #a00000;
-    }
+    .signup-btn:hover { background-color: #a00000; }
     /* Main Content */
     .main-content {
       flex: 1;
@@ -115,10 +117,7 @@
       background-color: #111;
       color: white;
     }
-    .rent-btn:hover {
-      background-color: #333;
-      transform: scale(1.05);
-    }
+    .rent-btn:hover { background-color: #333; transform: scale(1.05); }
     .topup-btn {
       background-color: #fff;
       color: #d60000;
@@ -129,35 +128,56 @@
       color: #fff;
       transform: scale(1.05);
     }
-    /* พื้นหลังไหลแบบน้ำ */
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(-45deg, #d60000, #000000, #ffffff, #111111);
-  background-size: 400% 400%;
-  animation: flowBG 15s ease infinite;
-  color: #111;
-}
-
-/* แอนิเมชันทำให้ gradient ไหล */
-@keyframes flowBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-button:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(214, 0, 0, 0.5);
-}
+    /* Modal */
+    #topupModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    #topupModal .modal-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 340px;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    #topupModal h3 { margin-bottom: 15px; }
+    #topupModal input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    #topupModal button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #topupModal .confirm-btn {
+      background: #d60000;
+      color: #fff;
+    }
+    #topupModal .close-btn {
+      background: #aaa;
+      color: #fff;
+      width: auto;
+      padding: 8px 15px;
+    }
   </style>
 </head>
 <body>
@@ -174,61 +194,52 @@ button:focus {
       <a href="register.html" class="signup-btn">+ สมัครสมาชิก</a>
     </div>
   </div>
+
   <!-- Main Content -->
   <div class="main-content">
     <div class="main-title">Mawnam Studio</div>
     <div class="main-subtitle">ระบบเว็บไซต์สำหรับการใช้งาน</div>
     <div class="action-buttons">
       <button class="rent-btn" onclick="alert('เข้าสู่หน้าหลัก')">🔧 เข้าสู่หน้าหลัก</button>
-<div class="action-buttons">
-  <button class="topup-btn" onclick="openTopup()">💰 เติมเงิน</button>
-</div>
-<div class="action-buttons">
-</div>
-<!-- Modal เติมเงิน -->
-<div id="topupModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;">
-  <div style="background:#fff; padding:25px; border-radius:12px; width:340px; text-align:center;">
-    <h3>กรอกจำนวนเงินที่ต้องการเติม</h3>
-    <input type="number" id="amount" placeholder="จำนวนเงิน (บาท)" 
-           style="width:100%; padding:10px; margin:10px 0; border-radius:6px; border:1px solid #ccc;">
-    <button onclick="generateQR()" style="width:100%; padding:10px; background:#d60000; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">
-      สร้าง QR Code
-    </button>
-    <div id="qrBox" style="margin-top:20px; display:none;">
-      <h4>สแกนเพื่อชำระเงิน</h4>
-      <img id="qrImage" src="" alt="QR Code" style="width:250px; margin:15px 0;">
-      <p id="qrText"></p>
+      <button class="topup-btn" onclick="openTopup()">💰 เติมเงิน</button>
     </div>
-    <button onclick="closeTopup()" style="margin-top:15px; background:#aaa; color:#fff; border:none; padding:8px 15px; border-radius:6px; cursor:pointer;">
-      ปิด
-    </button>
   </div>
-</div>
-<script>
-function openTopup() {
-  document.getElementById("topupModal").style.display = "flex";
-}
-function closeTopup() {
-  document.getElementById("topupModal").style.display = "none";
-  document.getElementById("qrBox").style.display = "none";
-}
-function generateQR() {
-  let amount = document.getElementById("amount").value;
-  if(amount <= 0 || amount === "") {
-    alert("กรุณากรอกจำนวนเงินที่ถูกต้อง");
-    return;
-  }
-  // เปลี่ยนเบอร์ PromptPay ของคุณตรงนี้ (เช่น เบอร์มือถือ/เลขบัตรประชาชน)
-  let phone = "0647012465";  
 
-  let qrUrl = `https://promptpay.io/${phone}/${amount}`;
-  document.getElementById("qrImage").src = qrUrl;
-  document.getElementById("qrText").innerText = `จำนวนเงิน ${amount} บาท`;
-  document.getElementById("qrBox").style.display = "block";
-}
-</script>
-</script
+  <!-- Modal เติมเงิน -->
+  <div id="topupModal">
+    <div class="modal-content">
+      <h3>กรอกจำนวนเงินที่ต้องการเติม</h3>
+      <input type="number" id="amount" placeholder="จำนวนเงิน (บาท)">
+      <button class="confirm-btn" onclick="generateQR()">สร้าง QR Code</button>
+      <div id="qrBox" style="margin-top:20px; display:none;">
+        <h4>สแกนเพื่อชำระเงิน</h4>
+        <img id="qrImage" src="" alt="QR Code" style="width:250px; margin:15px 0;">
+        <p id="qrText"></p>
+      </div>
+      <button class="close-btn" onclick="closeTopup()">ปิด</button>
+    </div>
   </div>
+
+  <script>
+    function openTopup() {
+      document.getElementById("topupModal").style.display = "flex";
+    }
+    function closeTopup() {
+      document.getElementById("topupModal").style.display = "none";
+      document.getElementById("qrBox").style.display = "none";
+    }
+    function generateQR() {
+      let amount = document.getElementById("amount").value;
+      if(amount <= 0 || amount === "") {
+        alert("กรุณากรอกจำนวนเงินที่ถูกต้อง");
+        return;
+      }
+      let phone = "0647012465"; // PromptPay
+      let qrUrl = `https://promptpay.io/${phone}/${amount}`;
+      document.getElementById("qrImage").src = qrUrl;
+      document.getElementById("qrText").innerText = `จำนวนเงิน ${amount} บาท`;
+      document.getElementById("qrBox").style.display = "block";
+    }
+  </script>
 </body>
 </html>
