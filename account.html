@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>จัดการบัญชี - Mawnam Studio</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:Arial,sans-serif;color:white;text-align:center;min-height:100vh;overflow-x:hidden;}
+    body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,#ff0000,#000000 80%);background-size:200% 200%;animation:waterflow 8s ease infinite;z-index:-2;}
+    @keyframes waterflow{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+    .shooting-star{position:fixed;width:2px;height:80px;background:linear-gradient(white,transparent);top:-100px;opacity:0.4;animation:shooting 4s linear infinite;z-index:-1;}
+    @keyframes shooting{0%{transform:translate(0,0) rotate(45deg);opacity:0;}10%{opacity:1;}100%{transform:translate(400px,400px) rotate(45deg);opacity:0;}}
+    .navbar{display:flex;justify-content:space-between;align-items:center;padding:12px 30px;background:rgba(0,0,0,0.3);color:white;position:sticky;top:0;z-index:1000;backdrop-filter:blur(6px);}
+    .navbar .left{display:flex;align-items:center;gap:15px;}
+    .navbar img{width:40px;height:40px;border-radius:50%;}
+    .navbar a{color:white;text-decoration:none;font-weight:bold;transition:color 0.3s;}
+    .navbar a:hover{color:#ff3333;}
+    .navbar .right{display:flex;align-items:center;gap:15px;}
+    .dropdown{position:relative;display:inline-block;}
+    .dropbtn{background:#990000;color:white;padding:8px 16px;border:none;border-radius:6px;cursor:pointer;font-weight:bold;}
+    .dropdown-content{display:none;position:absolute;right:0;background:rgba(20,20,20,0.95);min-width:200px;border-radius:10px;box-shadow:0px 4px 10px rgba(0,0,0,0.6);z-index:1001;}
+    .dropdown-content a{display:block;padding:12px;color:red;text-decoration:none;border-bottom:1px solid #333;}
+    .dropdown-content a:last-child{border-bottom:none;}
+    .dropdown-content a:hover{background:#330000;}
+    .dropdown:hover .dropdown-content{display:block;}
+    h1{color:#ff3333;margin:50px 0 20px;}
+    p{color:#ddd;}
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <img src="https://media.giphy.com/media/aPoWIEaPPoCXpzelGV/giphy.gif" alt="profile">
+      <a href="index.html">หน้าหลัก</a>
+      <a href="shop.html">สินค้า</a>
+      <a href="topup.html">เติมเงิน</a>
+      <a href="contact.html">ติดต่อเรา</a>
+    </div>
+    <div class="right">
+      <div class="dropdown">
+        <button class="dropbtn">โปรไฟล์ ▼</button>
+        <div class="dropdown-content">
+          <a href="account.html">จัดการบัญชี</a>
+          <a href="change-password.html">เปลี่ยนรหัสผ่าน</a>
+          <a href="orders.html">ออเดอร์ของฉัน</a>
+          <a href="purchase-history.html">ประวัติซื้อสินค้า</a>
+          <a href="#">ออกจากระบบ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <h1>จัดการบัญชี</h1>
+  <p>หน้านี้ใช้สำหรับแก้ไขข้อมูลส่วนตัว เช่น ชื่อผู้ใช้</p>
+
+  <!-- ดาวตก -->
+  <div class="shooting-star" style="left:10%; animation-delay:0s;"></div>
+  <div class="shooting-star" style="left:40%; animation-delay:2s;"></div>
+  <div class="shooting-star" style="left:70%; animation-delay:4s;"></div>
+</body>
+</html>
