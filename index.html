@@ -11,161 +11,160 @@
       box-sizing: border-box;
       font-family: 'Arial', sans-serif;
     }
-
     body {
-      height: 100vh;
+      background: #ffffff;
+      color: #111;
       display: flex;
       flex-direction: column;
-      background: linear-gradient(270deg, #ff0000, #111, #222, #ff0000);
-      background-size: 600% 600%;
-      animation: oceanMove 20s ease infinite;
+      min-height: 100vh;
     }
-
-    @keyframes oceanMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 15px 40px;
+      border-bottom: 1px solid #e0e0e0;
       background: #fff;
-      padding: 10px 30px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
-
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 25px;
     }
-
     .nav-left a {
       text-decoration: none;
       color: #111;
-      font-weight: bold;
+      font-weight: 500;
+      font-size: 15px;
       transition: color 0.3s;
     }
-
     .nav-left a:hover {
       color: #d60000;
     }
-
     .nav-logo img {
       height: 35px;
     }
-
     .nav-right {
       display: flex;
-      gap: 10px;
+      gap: 12px;
     }
-
     .nav-right a {
-      padding: 6px 15px;
-      border-radius: 6px;
+      padding: 8px 18px;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
       font-size: 14px;
       transition: background 0.3s, color 0.3s;
-      display: inline-block;
+      border: 1px solid transparent;
     }
-
     .login-btn {
-      background-color: #e0e0e0;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
       color: #000;
     }
-
     .login-btn:hover {
+      border-color: #d60000;
+      color: #d60000;
+    }
+    .signup-btn {
       background-color: #d60000;
       color: #fff;
     }
-
-    .signup-btn {
-      background-color: #d60000;
-      color: white;
-    }
-
     .signup-btn:hover {
       background-color: #a00000;
     }
-
     /* Main Content */
     .main-content {
       flex: 1;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       text-align: center;
-      padding: 20px;
+      padding: 60px 20px;
     }
-
     .main-title {
-      font-size: 40px;
+      font-size: 48px;
       font-weight: bold;
-      color: #fff;
-      margin-bottom: 10px;
-      text-shadow: 0 0 10px rgba(0,0,0,0.5);
+      margin-bottom: 15px;
     }
-
     .main-subtitle {
       font-size: 18px;
-      color: #f0f0f0;
-      margin-bottom: 25px;
+      color: #666;
+      margin-bottom: 35px;
     }
-
     .action-buttons {
       display: flex;
-      gap: 15px;
+      gap: 20px;
       justify-content: center;
     }
-
     .action-buttons button {
-      padding: 12px 20px;
+      padding: 14px 24px;
       border: none;
       border-radius: 10px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s;
+      transition: background 0.3s, transform 0.2s ease;
     }
-
     .rent-btn {
       background-color: #111;
       color: white;
     }
-
     .rent-btn:hover {
       background-color: #333;
       transform: scale(1.05);
     }
-
     .topup-btn {
       background-color: #fff;
       color: #d60000;
       border: 2px solid #d60000;
     }
-
     .topup-btn:hover {
       background-color: #d60000;
       color: #fff;
       transform: scale(1.05);
     }
+    /* พื้นหลังไหลแบบน้ำ */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(-45deg, #d60000, #000000, #ffffff, #111111);
+  background-size: 400% 400%;
+  animation: flowBG 15s ease infinite;
+  color: #111;
+}
+
+/* แอนิเมชันทำให้ gradient ไหล */
+@keyframes flowBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(214, 0, 0, 0.5);
+}
   </style>
 </head>
 <body>
-
-  <!-- Navbar -->
   <div class="navbar">
     <div class="nav-left">
       <div class="nav-logo">
-        <img src="https://www.svgrepo.com/show/354202/web.svg" alt="Logo">
+        <img src="https://i.pinimg.com/1200x/01/bf/c6/01bfc695c8d21b410eafa7a1bd3bbd73.jpg" alt="Logo">
       </div>
       <a href="#">หน้าหลัก</a>
       <a href="#">เข้าสู่เว็บไซต์</a>
@@ -175,16 +174,61 @@
       <a href="register.html" class="signup-btn">+ สมัครสมาชิก</a>
     </div>
   </div>
-
   <!-- Main Content -->
   <div class="main-content">
     <div class="main-title">Mawnam Studio</div>
-    <div class="main-subtitle">TEST</div>
+    <div class="main-subtitle">ระบบเว็บไซต์สำหรับการใช้งาน</div>
     <div class="action-buttons">
-      <button class="rent-btn" onclick="alert('เข้าสู่หน้าหลัก')">🔧 เข้้าสู่หน้าหลัก</button>
-      <button class="topup-btn" onclick="alert('ระบบเติมเงินยังไม่เปิดให้บริการ')">💰 เติมเงิน</button>
+      <button class="rent-btn" onclick="alert('เข้าสู่หน้าหลัก')">🔧 เข้าสู่หน้าหลัก</button>
+<div class="action-buttons">
+  <button class="topup-btn" onclick="openTopup()">💰 เติมเงิน</button>
+</div>
+<div class="action-buttons">
+</div>
+<!-- Modal เติมเงิน -->
+<div id="topupModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;">
+  <div style="background:#fff; padding:25px; border-radius:12px; width:340px; text-align:center;">
+    <h3>กรอกจำนวนเงินที่ต้องการเติม</h3>
+    <input type="number" id="amount" placeholder="จำนวนเงิน (บาท)" 
+           style="width:100%; padding:10px; margin:10px 0; border-radius:6px; border:1px solid #ccc;">
+    <button onclick="generateQR()" style="width:100%; padding:10px; background:#d60000; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:bold;">
+      สร้าง QR Code
+    </button>
+    <div id="qrBox" style="margin-top:20px; display:none;">
+      <h4>สแกนเพื่อชำระเงิน</h4>
+      <img id="qrImage" src="" alt="QR Code" style="width:250px; margin:15px 0;">
+      <p id="qrText"></p>
     </div>
+    <button onclick="closeTopup()" style="margin-top:15px; background:#aaa; color:#fff; border:none; padding:8px 15px; border-radius:6px; cursor:pointer;">
+      ปิด
+    </button>
   </div>
+</div>
+<script>
+function openTopup() {
+  document.getElementById("topupModal").style.display = "flex";
+}
+function closeTopup() {
+  document.getElementById("topupModal").style.display = "none";
+  document.getElementById("qrBox").style.display = "none";
+}
+function generateQR() {
+  let amount = document.getElementById("amount").value;
+  if(amount <= 0 || amount === "") {
+    alert("กรุณากรอกจำนวนเงินที่ถูกต้อง");
+    return;
+  }
+  // เปลี่ยนเบอร์ PromptPay ของคุณตรงนี้ (เช่น เบอร์มือถือ/เลขบัตรประชาชน)
+  let phone = "0647012465";  
 
+  let qrUrl = `https://promptpay.io/${phone}/${amount}`;
+  document.getElementById("qrImage").src = qrUrl;
+  document.getElementById("qrText").innerText = `จำนวนเงิน ${amount} บาท`;
+  document.getElementById("qrBox").style.display = "block";
+}
+</script>
+</script
+  </div>
 </body>
 </html>
