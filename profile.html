@@ -107,4 +107,13 @@
     }
   </script>
 </body>
+<script src="music-player.js"></script>
+<!-- UI คุมเพลง -->
+<div style="position: fixed; bottom: 20px; right: 20px;
+            background: rgba(0,0,0,0.7); padding: 10px;
+            border-radius: 10px; z-index: 9999; color:white;">
+  <button onclick="changeVolume(-0.1)">🔉 เบา</button>
+  <button onclick="changeVolume(0.1)">🔊 ดัง</button>
+  <button onclick="toggleMute()">⏯️ ปิด/เปิด</button>
+</div>
 </html>
