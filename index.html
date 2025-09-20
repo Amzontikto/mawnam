@@ -192,7 +192,6 @@
       topups.push({ amount: parseFloat(amount), time: new Date().toLocaleString() });
       localStorage.setItem("topups", JSON.stringify(topups));
     }
-
     // ✅ อัปเดตเมนูตามสถานะ login
     document.addEventListener("DOMContentLoaded", () => {
       const currentUser = localStorage.getItem("currentUser");
@@ -206,7 +205,6 @@
         document.getElementById("logoutBtn").style.display = "none";
       }
     });
-
     function logout() {
       localStorage.removeItem("currentUser");
       alert("ออกจากระบบแล้ว");
