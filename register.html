@@ -7,9 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(-45deg, #d60000, #000, #fff, #111);
-      background-size: 400% 400%;
-      animation: flowBG 15s ease infinite;
+      background: linear-gradient(135deg, #ccc, #888);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,21 +15,15 @@
       margin: 0;
     }
 
-    @keyframes flowBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .login-box {
+    .register-box {
       background: #fff;
       padding: 40px 35px;
       border-radius: 12px;
-      width: 380px;
+      width: 400px;
       box-shadow: 0 6px 25px rgba(0,0,0,0.25);
     }
 
-    .login-box h2 {
+    .register-box h2 {
       margin-bottom: 30px;
       color: #d60000;
       text-align: center;
@@ -57,12 +49,14 @@
       border: 1px solid #ccc;
       font-size: 15px;
       transition: all 0.2s;
+      background: #f2f6ff;
     }
 
     .form-group input:focus {
       outline: none;
       border: 1px solid #d60000;
       box-shadow: 0 0 5px rgba(214,0,0,0.3);
+      background: #fff;
     }
 
     .btn {
@@ -81,53 +75,69 @@
 
     .btn:hover {
       background: #a00000;
-      transform: translateY(-1px);
     }
 
-    .register-link {
+    .login-link {
       margin-top: 20px;
       font-size: 14px;
       text-align: center;
       color: #444;
     }
 
-    .register-link a {
+    .login-link a {
       color: #d60000;
       text-decoration: none;
       font-weight: bold;
     }
 
-    .register-link a:hover {
+    .login-link a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
+  <div class="register-box">
     <h2>สมัครสมาชิก</h2>
     <form onsubmit="registerUser(event)">
-      <input type="text" id="username" placeholder="ชื่อผู้ใช้" required>
-      <input type="password" id="password" placeholder="รหัสผ่าน" required>
-      <button type="submit">สมัครสมาชิก</button>
+      <div class="form-group">
+        <label for="username">ชื่อผู้ใช้</label>
+        <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้" required>
+      </div>
+      <div class="form-group">
+        <label for="password">รหัสผ่าน</label>
+        <input type="password" id="password" placeholder="กรอกรหัสผ่าน" required>
+      </div>
+      <div class="form-group">
+        <label for="confirm">ยืนยันรหัสผ่าน</label>
+        <input type="password" id="confirm" placeholder="ยืนยันรหัสผ่าน" required>
+      </div>
+      <button type="submit" class="btn">สมัครสมาชิก</button>
     </form>
+
+    <div class="login-link">
+      มีบัญชีอยู่แล้ว? <a href="login.html">เข้าสู่ระบบ</a>
+    </div>
   </div>
 
   <script>
     function registerUser(event) {
-      event.preventDefault(); // ไม่ให้รีเฟรชหน้า
+      event.preventDefault();
 
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm").value;
 
-      // เก็บข้อมูลใน localStorage
+      if (password !== confirm) {
+        alert("รหัสผ่านไม่ตรงกัน!");
+        return;
+      }
+
       localStorage.setItem("user_" + username, password);
 
       alert("สมัครสมาชิกสำเร็จ!");
-      
-      // ใช้ setTimeout เพื่อให้ alert แสดงก่อน redirect
       setTimeout(() => {
-        window.location.href = "login.html"; // ไปหน้า login
-      }, 100);
+        window.location.href = "login.html";
+      }, 500);
     }
   </script>
 </body>
