@@ -71,6 +71,12 @@
       text-decoration: none;
       font-weight: bold;
     }
+
+    /* ✅ Popup animation */
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -92,50 +98,64 @@
     </div>
   </div>
 
+  <!-- ✅ Modal Success -->
+  <div id="successModal" style="
+    display:none; justify-content:center; align-items:center;
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.6); z-index:2000;
+  ">
+    <div style="
+      background:white; padding:30px 40px; border-radius:15px;
+      text-align:center; animation:popIn 0.4s ease;
+    ">
+      <h2 style="color:green;">✅ เข้าสู่ระบบสำเร็จ!</h2>
+      <p>กำลังนำคุณไปยังหน้าหลัก...</p>
+    </div>
+  </div>
+
   <script>
     function loginUser(event) {
-      event.preventDefault(); // ❌ กันไม่ให้ส่ง POST ออกไป
+      event.preventDefault(); 
 
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
 
-      // ดึง users จาก localStorage
       let users = JSON.parse(localStorage.getItem("users")) || [];
-
-      // หาว่ามีผู้ใช้ตรงกับ username/password ไหม
       let found = users.find(u => u.username === username && u.password === password);
 
       if (found) {
-        alert("เข้าสู่ระบบสำเร็จ!");
-        // ✅ เด้งไปหน้าหลัก
-        window.location.href = "index.html";
+        // ✅ แสดง popup สำเร็จแทน alert
+        document.getElementById("successModal").style.display = "flex";
+        setTimeout(() => {
+          window.location.href = "index.html"; 
+        }, 2000);
       } else {
         alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
       }
     }
   </script>
-</body>
-<!-- ✅ Music Background -->
-<audio id="bgMusic" autoplay loop>
-  <source src="music.mp3" type="audio/mpeg">
-  เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
-</audio>
-<!-- ✅ Control UI -->
-<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 10px; z-index: 9999; color:white;">
-  <button onclick="changeVolume(-0.1)">🔉 เบา</button>
-  <button onclick="changeVolume(0.1)">🔊 ดัง</button>
-  <button onclick="toggleMute()">⏯️ ปิด/เปิด</button>
-</div>
-<script>
-  const bgMusic = document.getElementById("bgMusic");
-  bgMusic.volume = 0.5; // ✅ ตั้งค่าเสียงเริ่มต้นครึ่งหนึ่ง
 
-  function changeVolume(change) {
-    let newVolume = Math.min(1, Math.max(0, bgMusic.volume + change));
-    bgMusic.volume = newVolume;
-  }
-  function toggleMute() {
-    bgMusic.muted = !bgMusic.muted;
-  }
-</script>
+  <!-- ✅ Music Background -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+  <!-- ✅ Control UI -->
+  <div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 10px; z-index: 9999; color:white;">
+    <button onclick="changeVolume(-0.1)">🔉 เบา</button>
+    <button onclick="changeVolume(0.1)">🔊 ดัง</button>
+    <button onclick="toggleMute()">⏯️ ปิด/เปิด</button>
+  </div>
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+    bgMusic.volume = 0.5; 
+
+    function changeVolume(change) {
+      let newVolume = Math.min(1, Math.max(0, bgMusic.volume + change));
+      bgMusic.volume = newVolume;
+    }
+    function toggleMute() {
+      bgMusic.muted = !bgMusic.muted;
+    }
+  </script>
+</body>
 </html>
