@@ -158,4 +158,28 @@
     });
   </script>
 </body>
+<!-- ✅ Music Background -->
+<audio id="bgMusic" autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+  เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+</audio>
+<!-- ✅ Control UI -->
+<div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 10px; z-index: 9999; color:white;">
+  <button onclick="changeVolume(-0.1)">🔉 เบา</button>
+  <button onclick="changeVolume(0.1)">🔊 ดัง</button>
+  <button onclick="toggleMute()">⏯️ ปิด/เปิด</button>
+</div>
+<script>
+  const bgMusic = document.getElementById("bgMusic");
+  bgMusic.volume = 0.5; // ✅ ตั้งค่าเสียงเริ่มต้นครึ่งหนึ่ง
+
+  function changeVolume(change) {
+    let newVolume = Math.min(1, Math.max(0, bgMusic.volume + change));
+    bgMusic.volume = newVolume;
+  }
+
+  function toggleMute() {
+    bgMusic.muted = !bgMusic.muted;
+  }
+</script>
 </html>
