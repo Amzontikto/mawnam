@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หลังร้าน - จัดการสมาชิก</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f5f5f5;
+    }
+    h2 {
+      color: #d60000;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    table th, table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    table th {
+      background: #d60000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h2>รายชื่อสมาชิกที่สมัคร</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ลำดับ</th>
+        <th>ชื่อผู้ใช้</th>
+        <th>รหัสผ่าน</th>
+      </tr>
+    </thead>
+    <tbody id="userTable"></tbody>
+  </table>
+
+  <script>
+    function loadUsers() {
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      let tbody = document.getElementById("userTable");
+      tbody.innerHTML = "";
+
+      users.forEach((u, index) => {
+        let row = `<tr>
+          <td>${index + 1}</td>
+          <td>${u.username}</td>
+          <td>${u.password}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    loadUsers();
+  </script>
+</body>
+</html>
+<a href="admin.html">หลังร้าน</a>
