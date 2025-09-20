@@ -3,95 +3,269 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>หน้าหลัก</title>
+  <title>Mawnam Studio</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #000, #400);
-      color: #fff;
-      text-align: center;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow-x: hidden;
+      text-align: center;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* ===== พื้นหลังแดงดำเคลื่อนไหว ===== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #ff0000, #000000 80%);
+      background-size: 200% 200%;
+      animation: waterflow 8s ease infinite;
+      z-index: -2;
+    }
+
+    @keyframes waterflow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ===== ดาวตก ===== */
+    .shooting-star {
+      position: fixed;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(white, transparent);
+      top: -100px;
+      animation: shooting 4s linear infinite;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    @keyframes shooting {
+      0% {
+        transform: translate(0, 0) rotate(45deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(400px, 400px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* ===== Navbar โปร่งใส ===== */
     .navbar {
-      background: #fff;
-      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      padding: 12px 30px;
+      background: rgba(0, 0, 0, 0.3); /* โปร่งใส */
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px); /* เพิ่มเอฟเฟกต์เบลอ */
     }
-    .navbar-left {
+
+    .navbar .left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
     }
-    .navbar-left img {
-      width: 35px;
-      height: 35px;
+
+    .navbar img {
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
     }
-    .navbar-left a {
+
+    .navbar a {
+      color: white;
       text-decoration: none;
-      color: #000;
       font-weight: bold;
+      transition: color 0.3s;
     }
-    .navbar-right {
+
+    .navbar a:hover {
+      color: #ff3333;
+    }
+
+    .navbar .right {
       display: flex;
-      gap: 10px;
+      align-items: center;
+      gap: 15px;
     }
-    .navbar-right button {
-      padding: 8px 14px;
+
+    /* ===== ปุ่มโปรไฟล์ ===== */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropbtn {
+      background: #990000;
+      color: white;
+      padding: 8px 16px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
     }
-    .btn-profile { background: #333; color: #fff; }
-    .btn-logout { background: #d60000; color: #fff; }
-    .btn-admin { background: #0077cc; color: #fff; }
-    h1 { margin-top: 120px; }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: rgba(20,20,20,0.95);
+      min-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.6);
+      z-index: 1001;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 12px;
+      color: red;
+      text-decoration: none;
+      border-bottom: 1px solid #333;
+    }
+
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-content a:hover {
+      background: #330000;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* ===== Main Content ===== */
+    .main {
+      margin-top: 70px;
+      padding: 40px;
+    }
+
+    .logo {
+      width: 180px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #ff3333;
+    }
+
+    .status-box {
+      margin: 30px auto;
+      border: 2px solid #ff0000;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 600px;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .status-box h2 {
+      color: #ff3333;
+      margin-bottom: 10px;
+    }
+
+    .status {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .status div {
+      font-size: 14px;
+      color: white;
+    }
+
+    .btn-category {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff0000;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn-category:hover {
+      background: #cc0000;
+    }
   </style>
 </head>
 <body>
+  <!-- Navbar -->
   <div class="navbar">
-    <div class="navbar-left">
-      <img src="profile.png" alt="profile">
-      <a href="index2.html">หน้าหลัก</a>
+    <div class="left">
+      <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NGVidDRwYmhya2Q4eTExdm5kNWs4cmF5bXR6bWQ4aW81YW9yYmV5ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/aPoWIEaPPoCXpzelGV/giphy.gif" alt="profile">
+      <a href="index.html">หน้าหลัก</a>
+      <a href="shop.html">สินค้า</a>
+      <a href="topup.html">เติมเงิน</a>
+      <a href="contact.html">ติดต่อเรา</a>
     </div>
-    <div class="navbar-right">
-      <button class="btn-admin" id="adminMenu" style="display:none;" onclick="goToAdmin()">เมนูแอดมิน</button>
-      <button class="btn-profile" onclick="goToProfile()">โปรไฟล์</button>
-      <button class="btn-logout" onclick="logout()">ออกจากระบบ</button>
+    <div class="right">
+      <div class="dropdown">
+        <button class="dropbtn">โปรไฟล์ ▼</button>
+        <div class="dropdown-content">
+          <a href="#">จัดการบัญชี</a>
+          <a href="#">เปลี่ยนรหัสผ่าน</a>
+          <a href="#">ออเดอร์ของฉัน</a>
+          <a href="#">ประวัติซื้อสินค้า</a>
+          <a href="#">ออกจากระบบ</a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <h1>Mawnam Studio</h1>
-  <p>หน้านี้เป็นหน้าภายในเว็บไซต์</p>
+  <!-- Main Content -->
+  <div class="main">
+    <img class="logo" src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NGVidDRwYmhya2Q4eTExdm5kNWs4cmF5bXR6bWQ4aW81YW9yYmV5ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/aPoWIEaPPoCXpzelGV/giphy.gif" alt="Logo">
+    <h1>ยินดีต้อนรับสู่ Mawnam Studio</h1>
 
-  <script>
-    // โหลด currentUser
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (!currentUser) {
-      alert("กรุณาเข้าสู่ระบบก่อน");
-      window.location.href = "login.html";
-    }
+    <div class="status-box">
+      <h2>Mawnam Studio</h2>
+      <p>เปิดให้บริการมาแล้ว</p>
+      <div class="status">
+        <div>📅 ปี: 0</div>
+        <div>📅 เดือน: 5</div>
+        <div>⚙️ อาทิตย์: 24</div>
+        <div>📅 วัน: 4</div>
+        <div>⏰ ชั่วโมง: 12</div>
+        <div>🕒 นาที: 24</div>
+        <div>⏳ วินาที: 2</div>
+      </div>
+    </div>
 
-    // ถ้าเป็น admin ให้โชว์ปุ่มเมนูแอดมิน
-    if (currentUser.username === "admin") {
-      document.getElementById("adminMenu").style.display = "inline-block";
-    }
+    <a href="#" class="btn-category">หมวดหมู่แนะนำ ></a>
+  </div>
 
-    function goToProfile() {
-      window.location.href = "profile.html";
-    }
-    function goToAdmin() {
-      window.location.href = "admin.html"; // หน้าของแอดมิน
-    }
-    function logout() {
-      localStorage.removeItem("currentUser");
-      alert("ออกจากระบบแล้ว");
-      window.location.href = "index.html";
-    }
-  </script>
+  <!-- สร้างดาวตกหลายดวง -->
+  <div class="shooting-star" style="left:10%; animation-delay:0s;"></div>
+  <div class="shooting-star" style="left:40%; animation-delay:2s;"></div>
+  <div class="shooting-star" style="left:70%; animation-delay:4s;"></div>
 </body>
 </html>
