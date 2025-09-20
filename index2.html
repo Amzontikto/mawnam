@@ -1,186 +1,92 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mawnam Studio - หน้าเว็บไซต์</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หน้าหลัก</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
     body {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(-45deg, #d60000, #000000, #ffffff, #111111);
-      background-size: 400% 400%;
-      animation: flowBG 15s ease infinite;
-      color: #111;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #000, #400);
+      color: #fff;
+      text-align: center;
     }
-    @keyframes flowBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    /* Navbar */
     .navbar {
+      background: #fff;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 40px;
-      border-bottom: 1px solid #e0e0e0;
-      background: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-    .nav-left {
+    .navbar-left {
       display: flex;
       align-items: center;
-      gap: 25px;
+      gap: 10px;
     }
-    .nav-left a {
+    .navbar-left img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+    .navbar-left a {
       text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      font-size: 15px;
-      transition: color 0.3s;
-    }
-    .nav-left a:hover { color: #d60000; }
-    .nav-logo img { height: 35px; }
-    .nav-right {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-    .nav-right a {
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-      padding: 8px 16px;
-      border-radius: 8px;
-      transition: background 0.3s, color 0.3s;
-    }
-    .login-btn {
-      border: 1px solid #ccc;
-      background: #f9f9f9;
       color: #000;
-    }
-    .login-btn:hover { border-color: #d60000; color: #d60000; }
-    .signup-btn {
-      background-color: #d60000;
-      color: #fff;
-    }
-    .signup-btn:hover { background-color: #a00000; }
-    .profile-btn {
-      background-color: #333;
-      color: #fff;
-    }
-    .profile-btn:hover { background-color: #111; }
-    /* Main Content */
-    .main-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 60px 20px;
-    }
-    .main-title {
-      font-size: 48px;
       font-weight: bold;
-      margin-bottom: 15px;
     }
-    .main-subtitle {
-      font-size: 18px;
-      color: #666;
-      margin-bottom: 35px;
-    }
-    .action-buttons {
+    .navbar-right {
       display: flex;
-      gap: 20px;
-      justify-content: center;
+      gap: 10px;
     }
-    .action-buttons a, .action-buttons button {
-      padding: 14px 24px;
+    .navbar-right button {
+      padding: 8px 14px;
       border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s ease;
-      text-decoration: none;
-      display: inline-block;
+      font-weight: bold;
     }
-    .rent-btn {
-      background-color: #111;
-      color: white;
-    }
-    .rent-btn:hover { background-color: #333; transform: scale(1.05); }
-    .topup-btn {
-      background-color: #fff;
-      color: #d60000;
-      border: 2px solid #d60000;
-    }
-    .topup-btn:hover {
-      background-color: #d60000;
-      color: #fff;
-      transform: scale(1.05);
-    }
+    .btn-profile { background: #333; color: #fff; }
+    .btn-logout { background: #d60000; color: #fff; }
+    .btn-admin { background: #0077cc; color: #fff; }
+    h1 { margin-top: 120px; }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
   <div class="navbar">
-    <div class="nav-left">
-      <div class="nav-logo">
-        <img src="https://i.pinimg.com/1200x/01/bf/c6/01bfc695c8d21b410eafa7a1bd3bbd73.jpg" alt="Logo">
-      </div>
-      <a href="index.html">หน้าหลัก</a>
+    <div class="navbar-left">
+      <img src="profile.png" alt="profile">
+      <a href="index2.html">หน้าหลัก</a>
     </div>
-    <div class="nav-right">
-      <a href="profile.html" id="profileBtn" class="profile-btn" style="display:none;">👤 โปรไฟล์</a>
-      <a href="login.html" class="login-btn" id="loginBtn">เข้าสู่ระบบ</a>
-      <a href="register.html" class="signup-btn" id="registerBtn">+ สมัครสมาชิก</a>
-      <a href="#" class="signup-btn" id="logoutBtn" style="display:none;" onclick="logout()">ออกจากระบบ</a>
+    <div class="navbar-right">
+      <button class="btn-admin" id="adminMenu" style="display:none;" onclick="goToAdmin()">เมนูแอดมิน</button>
+      <button class="btn-profile" onclick="goToProfile()">โปรไฟล์</button>
+      <button class="btn-logout" onclick="logout()">ออกจากระบบ</button>
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <div class="main-title">Mawnam Studio</div>
-    <div class="main-subtitle">หน้านี้เป็นหน้าภายในเว็บไซต์</div>
-    <div class="action-buttons">
-      <a href="#" class="rent-btn">🔧 เมนูหลัก</a>
-      <button class="topup-btn" onclick="alert('ฟังก์ชันเติมเงินอยู่ในระหว่างพัฒนา')">💰 เติมเงิน</button>
-    </div>
-  </div>
+  <h1>Mawnam Studio</h1>
+  <p>หน้านี้เป็นหน้าภายในเว็บไซต์</p>
 
-  <!-- ✅ Script -->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      let currentUser = localStorage.getItem("currentUser");
-      try { currentUser = JSON.parse(currentUser); } catch(e) { currentUser = null; }
+    // โหลด currentUser
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (!currentUser) {
+      alert("กรุณาเข้าสู่ระบบก่อน");
+      window.location.href = "login.html";
+    }
 
-      if (currentUser) {
-        // ซ่อน login/register, แสดง profile/logout
-        document.getElementById("loginBtn").style.display = "none";
-        document.getElementById("registerBtn").style.display = "none";
-        document.getElementById("logoutBtn").style.display = "inline-block";
-        document.getElementById("profileBtn").style.display = "inline-block";
-      } else {
-        // ยังไม่ login → ซ่อน profile/logout
-        document.getElementById("loginBtn").style.display = "inline-block";
-        document.getElementById("registerBtn").style.display = "inline-block";
-        document.getElementById("logoutBtn").style.display = "none";
-        document.getElementById("profileBtn").style.display = "none";
-      }
-    });
+    // ถ้าเป็น admin ให้โชว์ปุ่มเมนูแอดมิน
+    if (currentUser.username === "admin") {
+      document.getElementById("adminMenu").style.display = "inline-block";
+    }
 
+    function goToProfile() {
+      window.location.href = "profile.html";
+    }
+    function goToAdmin() {
+      window.location.href = "admin.html"; // หน้าของแอดมิน
+    }
     function logout() {
       localStorage.removeItem("currentUser");
       alert("ออกจากระบบแล้ว");
@@ -188,14 +94,4 @@
     }
   </script>
 </body>
-<script src="music-player.js"></script>
-
-<!-- UI คุมเพลง -->
-<div style="position: fixed; bottom: 20px; right: 20px;
-            background: rgba(0,0,0,0.7); padding: 10px;
-            border-radius: 10px; z-index: 9999; color:white;">
-  <button onclick="changeVolume(-0.1)">🔉 เบา</button>
-  <button onclick="changeVolume(0.1)">🔊 ดัง</button>
-  <button onclick="toggleMute()">⏯️ ปิด/เปิด</button>
-</div>
 </html>
