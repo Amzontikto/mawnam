@@ -124,10 +124,13 @@
       let found = users.find(u => u.username === username && u.password === password);
 
       if (found) {
-        // ✅ แสดง popup สำเร็จแทน alert
+        // ✅ เก็บ user ปัจจุบันไว้ใน localStorage
+        localStorage.setItem("currentUser", found.username);
+
+        // ✅ แสดง popup สำเร็จ
         document.getElementById("successModal").style.display = "flex";
         setTimeout(() => {
-          window.location.href = "index.html"; 
+          window.location.href = "index2.html"; 
         }, 2000);
       } else {
         alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
@@ -135,9 +138,11 @@
     }
   </script>
 </body>
+
+<!-- ✅ โหลด music-player.js -->
 <script src="music-player.js"></script>
 
-<!-- UI คุมเพลง -->
+<!-- ✅ UI คุมเพลง -->
 <div style="position: fixed; bottom: 20px; right: 20px;
             background: rgba(0,0,0,0.7); padding: 10px;
             border-radius: 10px; z-index: 9999; color:white;">
