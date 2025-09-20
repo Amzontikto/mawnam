@@ -14,7 +14,7 @@
       background-size: 400% 400%;
       animation: flowBG 15s ease infinite;
       color: #111;
-      overflow-y: auto; /* ✅ เลื่อนหน้าได้ */
+      overflow-y: auto;
     }
     @keyframes flowBG {
       0% { background-position: 0% 50%; }
@@ -120,6 +120,7 @@
       </div>
       <a href="index.html">หน้าหลัก</a>
       <a href="index2.html">เข้าสู่เว็บไซต์</a>
+      <a href="admin.html" id="adminLink" style="display:none;">Admin</a> <!-- ✅ เมนู Admin -->
     </div>
     <div class="nav-right">
       <a href="login.html" class="login-btn" id="loginBtn">เข้าสู่ระบบ</a>
@@ -138,15 +139,7 @@
     </div>
   </div>
 
-  <!-- ✅ Section Dummy -->
-  <div class="section">
-    <h2>บริการของเรา</h2>
-    <p>เรามีบริการที่หลากหลาย ทั้งระบบเว็บไซต์ สตูดิโอ และเครื่องมือดิจิทัล</p>
-  </div>
-  <div class="section">
-    <h2>ผลงานที่ผ่านมา</h2>
-    <p>แสดงตัวอย่างผลงานที่เราทำ เช่น เว็บไซต์ ร้านค้าออนไลน์ และระบบสมาชิก</p>
-  </div>
+  <!-- ✅ Section ติดต่อ -->
   <div class="section">
     <h2>ติดต่อเรา</h2>
     <p>📧 example@email.com<br>📞 012-345-6789</p>
@@ -192,6 +185,7 @@
       topups.push({ amount: parseFloat(amount), time: new Date().toLocaleString() });
       localStorage.setItem("topups", JSON.stringify(topups));
     }
+
     // ✅ อัปเดตเมนูตามสถานะ login
     document.addEventListener("DOMContentLoaded", () => {
       const currentUser = localStorage.getItem("currentUser");
@@ -199,12 +193,19 @@
         document.getElementById("loginBtn").style.display = "none";
         document.getElementById("registerBtn").style.display = "none";
         document.getElementById("logoutBtn").style.display = "inline-block";
+
+        // ✅ ถ้าเป็น admin ให้โชว์เมนู Admin
+        if (currentUser === "admin") {
+          document.getElementById("adminLink").style.display = "inline-block";
+        }
       } else {
         document.getElementById("loginBtn").style.display = "inline-block";
         document.getElementById("registerBtn").style.display = "inline-block";
         document.getElementById("logoutBtn").style.display = "none";
+        document.getElementById("adminLink").style.display = "none";
       }
     });
+
     function logout() {
       localStorage.removeItem("currentUser");
       alert("ออกจากระบบแล้ว");
