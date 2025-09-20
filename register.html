@@ -115,7 +115,7 @@
     </form>
 
     <div class="login-link">
-      มีบัญชีอยู่แล้ว? <a href="login">เข้าสู่ระบบ</a>
+      มีบัญชีอยู่แล้ว? <a href="login.html">เข้าสู่ระบบ</a>
     </div>
   </div>
 
@@ -136,13 +136,9 @@
 
       alert("สมัครสมาชิกสำเร็จ!");
       setTimeout(() => {
-        window.location.href = "login"; // <-- แก้ตรงนี้แล้ว
+        window.location.href = "login.html"; // ✅ เปลี่ยนเป็นไฟล์ login.html
       }, 500);
     }
   </script>
-<form action="register_process.php" method="post">
-  <input type="text" name="username" placeholder="ชื่อผู้ใช้" required>
-  <input type="password" name="password" placeholder="รหัสผ่าน" required>
-  <button type="submit">สมัครสมาชิก</button>
-</form>
+</body>
 </html>
