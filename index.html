@@ -21,7 +21,6 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    button:focus { outline: none; box-shadow: 0 0 5px rgba(214, 0, 0, 0.5); }
 
     /* Navbar */
     .navbar {
@@ -46,6 +45,8 @@
     .login-btn:hover { border-color: #d60000; color: #d60000; }
     .signup-btn { background-color: #d60000; color: #fff; }
     .signup-btn:hover { background-color: #a00000; }
+    .admin-btn { background-color: #333; color: #fff; }
+    .admin-btn:hover { background-color: #111; }
 
     /* Main Content */
     .main-content {
@@ -67,14 +68,11 @@
     .topup-btn { background-color: #fff; color: #d60000; border: 2px solid #d60000; }
     .topup-btn:hover { background-color: #d60000; color: #fff; transform: scale(1.05); }
 
-    /* Section เนื้อหา */
+    /* Section */
     .section {
       padding: 100px 20px;
       text-align: center;
       color: #fff;
-    }
-    .section:nth-child(even) {
-      background: rgba(0,0,0,0.3);
     }
     .section h2 {
       font-size: 32px;
@@ -86,29 +84,6 @@
       margin: auto;
       line-height: 1.6;
     }
-
-    /* Modal */
-    #topupModal {
-      display: none; position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%; background: rgba(0,0,0,0.6);
-      justify-content: center; align-items: center; z-index: 2000;
-    }
-    #topupModal .modal-content {
-      background: #fff; padding: 25px; border-radius: 12px;
-      width: 340px; text-align: center; animation: fadeIn 0.3s ease;
-    }
-    @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-    #topupModal h3 { margin-bottom: 15px; }
-    #topupModal input {
-      width: 100%; padding: 10px; margin: 10px 0;
-      border-radius: 6px; border: 1px solid #ccc;
-    }
-    #topupModal button {
-      width: 100%; padding: 10px; margin-top: 10px;
-      border: none; border-radius: 6px; cursor: pointer; font-weight: bold;
-    }
-    #topupModal .confirm-btn { background: #d60000; color: #fff; }
-    #topupModal .close-btn { background: #aaa; color: #fff; width: auto; padding: 8px 15px; }
   </style>
 </head>
 <body>
@@ -120,7 +95,8 @@
       </div>
       <a href="index.html">หน้าหลัก</a>
       <a href="index2.html">เข้าสู่เว็บไซต์</a>
-      <a href="admin.html" id="adminLink" style="display:none;">Admin</a> <!-- ✅ เมนู Admin -->
+      <!-- ✅ ปุ่ม Admin Panel (ซ่อนค่าเริ่มต้น) -->
+      <a href="admin.html" id="adminMenu" class="admin-btn" style="display:none;">Admin Panel</a>
     </div>
     <div class="nav-right">
       <a href="login.html" class="login-btn" id="loginBtn">เข้าสู่ระบบ</a>
@@ -139,53 +115,13 @@
     </div>
   </div>
 
-  <!-- ✅ Section ติดต่อ -->
+  <!-- ✅ Section (เหลือเฉพาะการติดต่อ) -->
   <div class="section">
     <h2>ติดต่อเรา</h2>
     <p>📧 example@email.com<br>📞 012-345-6789</p>
   </div>
 
-  <!-- Modal เติมเงิน -->
-  <div id="topupModal">
-    <div class="modal-content">
-      <h3>กรอกจำนวนเงินที่ต้องการเติม</h3>
-      <input type="number" id="amount" placeholder="จำนวนเงิน (บาท)">
-      <button class="confirm-btn" onclick="generateQR()">สร้าง QR Code</button>
-      <div id="qrBox" style="margin-top:20px; display:none;">
-        <h4>สแกนเพื่อชำระเงิน</h4>
-        <img id="qrImage" src="" alt="QR Code" style="width:250px; margin:15px 0;">
-        <p id="qrText"></p>
-      </div>
-      <button class="close-btn" onclick="closeTopup()">ปิด</button>
-    </div>
-  </div>
-
   <script>
-    function openTopup() {
-      document.getElementById("topupModal").style.display = "flex";
-    }
-    function closeTopup() {
-      document.getElementById("topupModal").style.display = "none";
-      document.getElementById("qrBox").style.display = "none";
-    }
-    function generateQR() {
-      let amount = document.getElementById("amount").value;
-      if(amount <= 0 || amount === "") {
-        alert("กรุณากรอกจำนวนเงินที่ถูกต้อง");
-        return;
-      }
-      let phone = "0647012465"; // PromptPay
-      let qrUrl = `https://promptpay.io/${phone}/${amount}`;
-      document.getElementById("qrImage").src = qrUrl;
-      document.getElementById("qrText").innerText = `จำนวนเงิน ${amount} บาท`;
-      document.getElementById("qrBox").style.display = "block";
-
-      // ✅ เก็บข้อมูล topup ไว้ใน localStorage
-      let topups = JSON.parse(localStorage.getItem("topups")) || [];
-      topups.push({ amount: parseFloat(amount), time: new Date().toLocaleString() });
-      localStorage.setItem("topups", JSON.stringify(topups));
-    }
-
     // ✅ อัปเดตเมนูตามสถานะ login
     document.addEventListener("DOMContentLoaded", () => {
       const currentUser = localStorage.getItem("currentUser");
@@ -194,15 +130,15 @@
         document.getElementById("registerBtn").style.display = "none";
         document.getElementById("logoutBtn").style.display = "inline-block";
 
-        // ✅ ถ้าเป็น admin ให้โชว์เมนู Admin
+        // ✅ ถ้า user = admin ให้โชว์เมนู Admin
         if (currentUser === "admin") {
-          document.getElementById("adminLink").style.display = "inline-block";
+          document.getElementById("adminMenu").style.display = "inline-block";
         }
       } else {
         document.getElementById("loginBtn").style.display = "inline-block";
         document.getElementById("registerBtn").style.display = "inline-block";
         document.getElementById("logoutBtn").style.display = "none";
-        document.getElementById("adminLink").style.display = "none";
+        document.getElementById("adminMenu").style.display = "none";
       }
     });
 
