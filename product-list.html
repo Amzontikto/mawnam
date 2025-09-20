@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายการสินค้า</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle, #ff0000, #000000 80%);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      min-height: 100vh;
+    }
+    h2 {
+      color: #ff4d4d;
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(0,0,0,0.6);
+      border: 2px solid #ff3333;
+      border-radius: 12px;
+      padding: 15px;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      margin: 10px 0;
+      color: #fff;
+    }
+    .card p {
+      color: #ccc;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📦 รายการสินค้าทั้งหมด</h2>
+  <div class="grid" id="productGrid"></div>
+
+  <script>
+    function loadProducts() {
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+      let grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      if (products.length === 0) {
+        grid.innerHTML = "<p>❌ ยังไม่มีสินค้า</p>";
+        return;
+      }
+
+      products.forEach(p => {
+        let card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${p.image}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p>โอกาสสุ่ม: ${p.chance}%</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    loadProducts();
+  </script>
+</body>
+</html>
