@@ -51,6 +51,35 @@
     }
     .nav-left a:hover { color: #d60000; }
     .nav-logo img { height: 35px; }
+    .nav-right {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    .nav-right a {
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .login-btn {
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      color: #000;
+    }
+    .login-btn:hover { border-color: #d60000; color: #d60000; }
+    .signup-btn {
+      background-color: #d60000;
+      color: #fff;
+    }
+    .signup-btn:hover { background-color: #a00000; }
+    .profile-btn {
+      background-color: #333;
+      color: #fff;
+    }
+    .profile-btn:hover { background-color: #111; }
     /* Main Content */
     .main-content {
       flex: 1;
@@ -112,7 +141,12 @@
         <img src="https://i.pinimg.com/1200x/01/bf/c6/01bfc695c8d21b410eafa7a1bd3bbd73.jpg" alt="Logo">
       </div>
       <a href="index.html">หน้าหลัก</a>
-      <!-- ❌ เอาออก: เข้าสู่เว็บไซต์, login, register, logout -->
+    </div>
+    <div class="nav-right">
+      <a href="profile.html" id="profileBtn" class="profile-btn" style="display:none;">👤 โปรไฟล์</a>
+      <a href="login.html" class="login-btn" id="loginBtn">เข้าสู่ระบบ</a>
+      <a href="register.html" class="signup-btn" id="registerBtn">+ สมัครสมาชิก</a>
+      <a href="#" class="signup-btn" id="logoutBtn" style="display:none;" onclick="logout()">ออกจากระบบ</a>
     </div>
   </div>
 
@@ -125,11 +159,35 @@
       <button class="topup-btn" onclick="alert('ฟังก์ชันเติมเงินอยู่ในระหว่างพัฒนา')">💰 เติมเงิน</button>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = localStorage.getItem("currentUser");
+
+      if (currentUser) {
+        document.getElementById("loginBtn").style.display = "none";
+        document.getElementById("registerBtn").style.display = "none";
+        document.getElementById("logoutBtn").style.display = "inline-block";
+        document.getElementById("profileBtn").style.display = "inline-block"; // ✅ แสดงปุ่มโปรไฟล์
+      } else {
+        document.getElementById("loginBtn").style.display = "inline-block";
+        document.getElementById("registerBtn").style.display = "inline-block";
+        document.getElementById("logoutBtn").style.display = "none";
+        document.getElementById("profileBtn").style.display = "none"; // ✅ ซ่อนปุ่มโปรไฟล์
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem("currentUser");
+      alert("ออกจากระบบแล้ว");
+      window.location.href = "index.html";
+    }
+  </script>
 </body>
+
 <!-- ✅ Music Background -->
 <audio id="bgMusic" autoplay loop>
   <source src="music.mp3" type="audio/mpeg">
-  เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
 </audio>
 <!-- ✅ Control UI -->
 <div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 10px; z-index: 9999; color:white;">
