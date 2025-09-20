@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สุ่มสินค้า</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle, #ff0000, #000000 80%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    h2 {
+      color: #ff4d4d;
+      margin-bottom: 20px;
+    }
+    .btn {
+      padding: 15px 25px;
+      margin: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #d60000;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #a00000;
+    }
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+      display: none;
+      width: 300px;
+    }
+    .result img {
+      max-width: 150px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎲 ระบบสุ่มสินค้า</h2>
+  <button class="btn" onclick="gacha()">กดเพื่อสุ่ม!</button>
+
+  <div class="result" id="resultBox">
+    <h3 id="resultName"></h3>
+    <img id="resultImage" src="">
+  </div>
+
+  <script>
+    function gacha() {
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+      if (products.length === 0) {
+        alert("❌ ยังไม่มีสินค้า กรุณาเพิ่มสินค้าก่อน");
+        return;
+      }
+
+      // สร้าง pool ตามโอกาส
+      let pool = [];
+      products.forEach(p => {
+        for (let i = 0; i < p.chance; i++) {
+          pool.push(p);
+        }
+      });
+
+      // สุ่มจาก pool
+      let randomItem = pool[Math.floor(Math.random() * pool.length)];
+
+      // แสดงผล
+      document.getElementById("resultName").innerText = "คุณได้: " + randomItem.name;
+      document.getElementById("resultImage").src = randomItem.image;
+      document.getElementById("resultBox").style.display = "block";
+    }
+  </script>
+</body>
+</html>

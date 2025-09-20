@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เพิ่มสินค้า</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #000, #800000, #ff0000);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 12px;
+      width: 400px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #ff4d4d;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: #d60000;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background: #a00000;
+    }
+    .list {
+      margin-top: 20px;
+      text-align: left;
+    }
+    .list-item {
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      margin: 6px 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>เพิ่มสินค้า</h2>
+    <input type="text" id="productName" placeholder="ชื่อสินค้า">
+    <input type="text" id="productImage" placeholder="ลิงก์รูปภาพสินค้า">
+    <input type="number" id="productChance" placeholder="โอกาสสุ่ม (%)" min="1" max="100">
+    <button class="btn" onclick="addProduct()">เพิ่มสินค้า</button>
+
+    <div class="list" id="productList"></div>
+  </div>
+
+  <script>
+    function loadProducts() {
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+      const list = document.getElementById("productList");
+      list.innerHTML = "<h3>📦 รายการสินค้า</h3>";
+      products.forEach((p, i) => {
+        list.innerHTML += `
+          <div class="list-item">
+            <b>${i+1}. ${p.name}</b><br>
+            🖼️ <img src="${p.image}" alt="${p.name}" width="50"><br>
+            🎲 โอกาส: ${p.chance}%
+          </div>
+        `;
+      });
+    }
+
+    function addProduct() {
+      const name = document.getElementById("productName").value.trim();
+      const image = document.getElementById("productImage").value.trim();
+      const chance = parseInt(document.getElementById("productChance").value);
+
+      if (!name || !image || isNaN(chance) || chance < 1 || chance > 100) {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน และใส่โอกาสสุ่มระหว่าง 1-100");
+        return;
+      }
+
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+      products.push({ name, image, chance });
+      localStorage.setItem("products", JSON.stringify(products));
+
+      alert("เพิ่มสินค้าเรียบร้อย!");
+      document.getElementById("productName").value = "";
+      document.getElementById("productImage").value = "";
+      document.getElementById("productChance").value = "";
+
+      loadProducts();
+    }
+
+    // โหลดรายการสินค้าเมื่อเปิดหน้านี้
+    loadProducts();
+  </script>
+</body>
+</html>
