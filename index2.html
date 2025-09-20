@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mawnam Studio</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
       font-family: Arial, sans-serif;
@@ -25,8 +21,7 @@
       content: "";
       position: fixed;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       background: radial-gradient(circle, #ff0000, #000000 80%);
       background-size: 200% 200%;
       animation: waterflow 8s ease infinite;
@@ -50,19 +45,10 @@
       opacity: 0.4;
       z-index: -1;
     }
-
     @keyframes shooting {
-      0% {
-        transform: translate(0, 0) rotate(45deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      100% {
-        transform: translate(400px, 400px) rotate(45deg);
-        opacity: 0;
-      }
+      0% { transform: translate(0,0) rotate(45deg); opacity:0; }
+      10% { opacity:1; }
+      100% { transform: translate(400px,400px) rotate(45deg); opacity:0; }
     }
 
     /* ===== Navbar โปร่งใส ===== */
@@ -71,49 +57,33 @@
       justify-content: space-between;
       align-items: center;
       padding: 12px 30px;
-      background: rgba(0, 0, 0, 0.3); /* โปร่งใส */
+      background: rgba(0,0,0,0.3);
       color: white;
       position: sticky;
       top: 0;
       z-index: 1000;
-      backdrop-filter: blur(6px); /* เพิ่มเอฟเฟกต์เบลอ */
+      backdrop-filter: blur(6px);
     }
-
     .navbar .left {
       display: flex;
       align-items: center;
       gap: 15px;
     }
-
     .navbar img {
-      width: 40px;
-      height: 40px;
+      width: 40px; height: 40px;
       border-radius: 50%;
     }
-
     .navbar a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s;
     }
+    .navbar a:hover { color: #ff3333; }
+    .navbar .right { display: flex; align-items: center; gap: 15px; }
 
-    .navbar a:hover {
-      color: #ff3333;
-    }
-
-    .navbar .right {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    /* ===== ปุ่มโปรไฟล์ ===== */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
+    /* ===== Dropdown โปรไฟล์ ===== */
+    .dropdown { position: relative; display: inline-block; }
     .dropbtn {
       background: #990000;
       color: white;
@@ -123,7 +93,6 @@
       cursor: pointer;
       font-weight: bold;
     }
-
     .dropdown-content {
       display: none;
       position: absolute;
@@ -134,7 +103,6 @@
       box-shadow: 0px 4px 10px rgba(0,0,0,0.6);
       z-index: 1001;
     }
-
     .dropdown-content a {
       display: block;
       padding: 12px;
@@ -142,37 +110,14 @@
       text-decoration: none;
       border-bottom: 1px solid #333;
     }
+    .dropdown-content a:last-child { border-bottom: none; }
+    .dropdown-content a:hover { background: #330000; }
+    .dropdown:hover .dropdown-content { display: block; }
 
-    .dropdown-content a:last-child {
-      border-bottom: none;
-    }
-
-    .dropdown-content a:hover {
-      background: #330000;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    /* ===== Main Content ===== */
-    .main {
-      margin-top: 70px;
-      padding: 40px;
-    }
-
-    .logo {
-      width: 180px;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #ff3333;
-    }
-
+    /* ===== กล่องเนื้อหา ===== */
+    .main { margin-top: 70px; padding: 40px; }
+    .logo { width: 180px; margin-bottom: 20px; }
+    h1 { font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #ff3333; }
     .status-box {
       margin: 30px auto;
       border: 2px solid #ff0000;
@@ -181,40 +126,19 @@
       max-width: 600px;
       background: rgba(0,0,0,0.5);
     }
-
-    .status-box h2 {
-      color: #ff3333;
-      margin-bottom: 10px;
-    }
-
+    .status-box h2 { color: #ff3333; margin-bottom: 10px; }
     .status {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 10px;
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 15px; margin-top: 10px;
     }
-
-    .status div {
-      font-size: 14px;
-      color: white;
-    }
-
+    .status div { font-size: 14px; color: white; }
     .btn-category {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #ff0000;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
+      display: inline-block; margin-top: 20px; padding: 10px 20px;
+      background: #ff0000; color: white;
+      border-radius: 8px; text-decoration: none; font-weight: bold;
       transition: background 0.3s;
     }
-
-    .btn-category:hover {
-      background: #cc0000;
-    }
+    .btn-category:hover { background: #cc0000; }
   </style>
 </head>
 <body>
@@ -231,11 +155,10 @@
       <div class="dropdown">
         <button class="dropbtn">โปรไฟล์ ▼</button>
         <div class="dropdown-content">
-          <a href="#">จัดการบัญชี</a>
-          <a href="#">เปลี่ยนรหัสผ่าน</a>
-          <a href="#">ออเดอร์ของฉัน</a>
-          <a href="#">ประวัติซื้อสินค้า</a>
-          <a href="#">ออกจากระบบ</a>
+          <a href="profile.html">จัดการบัญชี</a>
+          <a href="purchase-history.html">ประวัติซื้อสินค้า</a>
+          <a href="topup-history.html">ประวัติการเติมเงิน</a>
+          <a href="#" onclick="logout()">ออกจากระบบ</a>
         </div>
       </div>
     </div>
@@ -249,23 +172,52 @@
     <div class="status-box">
       <h2>Mawnam Studio</h2>
       <p>เปิดให้บริการมาแล้ว</p>
-      <div class="status">
-        <div>📅 ปี: 0</div>
-        <div>📅 เดือน: 5</div>
-        <div>⚙️ อาทิตย์: 24</div>
-        <div>📅 วัน: 4</div>
-        <div>⏰ ชั่วโมง: 12</div>
-        <div>🕒 นาที: 24</div>
-        <div>⏳ วินาที: 2</div>
-      </div>
+      <div class="status" id="uptime"></div>
     </div>
 
     <a href="#" class="btn-category">หมวดหมู่แนะนำ ></a>
   </div>
 
-  <!-- สร้างดาวตกหลายดวง -->
+  <!-- ดาวตก -->
   <div class="shooting-star" style="left:10%; animation-delay:0s;"></div>
   <div class="shooting-star" style="left:40%; animation-delay:2s;"></div>
   <div class="shooting-star" style="left:70%; animation-delay:4s;"></div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("currentUser");
+      alert("ออกจากระบบแล้ว");
+      window.location.href = "index.html";
+    }
+
+    // ตัวนับเวลา uptime
+    const startTime = new Date("2024-05-01T00:00:00"); // กำหนดวันเริ่มเปิด
+    const uptimeDiv = document.getElementById("uptime");
+
+    function updateUptime() {
+      const now = new Date();
+      let diff = Math.floor((now - startTime) / 1000);
+
+      const years = Math.floor(diff / (3600*24*365)); diff %= 3600*24*365;
+      const months = Math.floor(diff / (3600*24*30)); diff %= 3600*24*30;
+      const weeks = Math.floor(diff / (3600*24*7)); diff %= 3600*24*7;
+      const days = Math.floor(diff / (3600*24)); diff %= 3600*24;
+      const hours = Math.floor(diff / 3600); diff %= 3600;
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
+
+      uptimeDiv.innerHTML = `
+        📅 ปี: ${years} &nbsp;
+        📅 เดือน: ${months} &nbsp;
+        ⚙️ อาทิตย์: ${weeks} &nbsp;
+        📅 วัน: ${days} &nbsp;
+        ⏰ ชั่วโมง: ${hours} &nbsp;
+        🕒 นาที: ${minutes} &nbsp;
+        ⏳ วินาที: ${seconds}
+      `;
+    }
+    setInterval(updateUptime, 1000);
+    updateUptime();
+  </script>
 </body>
 </html>
