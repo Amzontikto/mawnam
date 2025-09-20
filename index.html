@@ -14,6 +14,7 @@
       background-size: 400% 400%;
       animation: flowBG 15s ease infinite;
       color: #111;
+      overflow-y: auto; /* ✅ เลื่อนหน้าได้ */
     }
     @keyframes flowBG {
       0% { background-position: 0% 50%; }
@@ -136,6 +137,7 @@
       document.getElementById("topupModal").style.display = "none";
       document.getElementById("qrBox").style.display = "none";
     }
+
     function generateQR() {
       let amount = document.getElementById("amount").value;
       if(amount <= 0 || amount === "") {
@@ -147,6 +149,11 @@
       document.getElementById("qrImage").src = qrUrl;
       document.getElementById("qrText").innerText = `จำนวนเงิน ${amount} บาท`;
       document.getElementById("qrBox").style.display = "block";
+
+      // ✅ บันทึกการเติมเงินใน localStorage
+      let topups = JSON.parse(localStorage.getItem("topups")) || [];
+      topups.push({ amount: parseFloat(amount), time: new Date().toLocaleString() });
+      localStorage.setItem("topups", JSON.stringify(topups));
     }
 
     // ✅ อัปเดตเมนูตามสถานะ login
