@@ -1,119 +1,246 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เข้าสู่ระบบ</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mawnam Studio</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ccc, #888);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
     }
-    .login-box {
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(-45deg, #d60000, #000000, #ffffff, #111111);
+      background-size: 400% 400%;
+      animation: flowBG 15s ease infinite;
+      color: #111;
+    }
+    @keyframes flowBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(214, 0, 0, 0.5);
+    }
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      border-bottom: 1px solid #e0e0e0;
       background: #fff;
-      padding: 40px 35px;
-      border-radius: 12px;
-      width: 400px;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .login-box h2 {
-      margin-bottom: 30px;
-      color: #d60000;
-      text-align: center;
-      font-size: 22px;
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
     }
-    .form-group {
-      margin-bottom: 20px;
+    .nav-left a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.3s;
     }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: #333;
+    .nav-left a:hover { color: #d60000; }
+    .nav-logo img { height: 35px; }
+    .nav-right { display: flex; gap: 12px; }
+    .nav-right a {
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
       font-weight: bold;
       font-size: 14px;
+      transition: background 0.3s, color 0.3s;
+      border: 1px solid transparent;
     }
-    .form-group input {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 8px;
+    .login-btn {
       border: 1px solid #ccc;
-      font-size: 15px;
-      background: #f2f6ff;
+      background: #f9f9f9;
+      color: #000;
     }
-    .btn {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      background: #d60000;
+    .login-btn:hover {
+      border-color: #d60000;
+      color: #d60000;
+    }
+    .signup-btn {
+      background-color: #d60000;
       color: #fff;
+    }
+    .signup-btn:hover { background-color: #a00000; }
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .main-title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .main-subtitle {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 35px;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .action-buttons a, .action-buttons button {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 10px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background: #a00000;
-    }
-    .register-link {
-      margin-top: 20px;
-      font-size: 14px;
-      text-align: center;
-      color: #444;
-    }
-    .register-link a {
-      color: #d60000;
+      transition: background 0.3s, transform 0.2s ease;
       text-decoration: none;
+      display: inline-block;
+    }
+    .rent-btn {
+      background-color: #111;
+      color: white;
+    }
+    .rent-btn:hover { background-color: #333; transform: scale(1.05); }
+    .topup-btn {
+      background-color: #fff;
+      color: #d60000;
+      border: 2px solid #d60000;
+    }
+    .topup-btn:hover {
+      background-color: #d60000;
+      color: #fff;
+      transform: scale(1.05);
+    }
+    /* Modal */
+    #topupModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    #topupModal .modal-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 340px;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    #topupModal h3 { margin-bottom: 15px; }
+    #topupModal input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    #topupModal button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
       font-weight: bold;
+    }
+    #topupModal .confirm-btn {
+      background: #d60000;
+      color: #fff;
+    }
+    #topupModal .close-btn {
+      background: #aaa;
+      color: #fff;
+      width: auto;
+      padding: 8px 15px;
     }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <h2>เข้าสู่ระบบ</h2>
-    <form onsubmit="loginUser(event)">
-      <div class="form-group">
-        <label for="username">ชื่อผู้ใช้</label>
-        <input type="text" id="username" required>
+  <div class="navbar">
+    <div class="nav-left">
+      <div class="nav-logo">
+        <img src="https://i.pinimg.com/1200x/01/bf/c6/01bfc695c8d21b410eafa7a1bd3bbd73.jpg" alt="Logo">
       </div>
-      <div class="form-group">
-        <label for="password">รหัสผ่าน</label>
-        <input type="password" id="password" required>
-      </div>
-      <button type="submit" class="btn">เข้าสู่ระบบ</button>
-    </form>
-    <div class="register-link">
-      ยังไม่มีบัญชี? <a href="register.html">สมัครสมาชิก</a>
+      <a href="index.html">หน้าหลัก</a>
+      <a href="index2.html">เข้าสู่เว็บไซต์</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html" class="login-btn">เข้าสู่ระบบ</a>
+      <a href="register.html" class="signup-btn">+ สมัครสมาชิก</a>
     </div>
   </div>
 
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="main-title">Mawnam Studio</div>
+    <div class="main-subtitle">ระบบเว็บไซต์สำหรับการใช้งาน</div>
+    <div class="action-buttons">
+      <a href="index2.html" class="rent-btn">🔧 เข้าสู่หน้าหลัก</a>
+      <button class="topup-btn" onclick="openTopup()">💰 เติมเงิน</button>
+    </div>
+  </div>
+
+  <!-- Modal เติมเงิน -->
+  <div id="topupModal">
+    <div class="modal-content">
+      <h3>กรอกจำนวนเงินที่ต้องการเติม</h3>
+      <input type="number" id="amount" placeholder="จำนวนเงิน (บาท)">
+      <button class="confirm-btn" onclick="generateQR()">สร้าง QR Code</button>
+      <div id="qrBox" style="margin-top:20px; display:none;">
+        <h4>สแกนเพื่อชำระเงิน</h4>
+        <img id="qrImage" src="" alt="QR Code" style="width:250px; margin:15px 0;">
+        <p id="qrText"></p>
+      </div>
+      <button class="close-btn" onclick="closeTopup()">ปิด</button>
+    </div>
+  </div>
   <script>
-    function loginUser(event) {
-      event.preventDefault(); // ❌ กันไม่ให้ส่ง POST ออกไป
-
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-
-      // ดึง users จาก localStorage
-      let users = JSON.parse(localStorage.getItem("users")) || [];
-
-      // หาว่ามีผู้ใช้ตรงกับ username/password ไหม
-      let found = users.find(u => u.username === username && u.password === password);
-
-      if (found) {
-        alert("เข้าสู่ระบบสำเร็จ!");
-        // ✅ เด้งไปหน้าหลัก
-        window.location.href = "index.html";
-      } else {
-        alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+    function openTopup() {
+      document.getElementById("topupModal").style.display = "flex";
+    }
+    function closeTopup() {
+      document.getElementById("topupModal").style.display = "none";
+      document.getElementById("qrBox").style.display = "none";
+    }
+    function generateQR() {
+      let amount = document.getElementById("amount").value;
+      if(amount <= 0 || amount === "") {
+        alert("กรุณากรอกจำนวนเงินที่ถูกต้อง");
+        return;
       }
+      let phone = "0647012465"; // PromptPay
+      let qrUrl = `https://promptpay.io/${phone}/${amount}`;
+      document.getElementById("qrImage").src = qrUrl;
+      document.getElementById("qrText").innerText = `จำนวนเงิน ${amount} บาท`;
+      document.getElementById("qrBox").style.display = "block";
     }
   </script>
 </body>
-<script src="script.js"></script>
 </html>
