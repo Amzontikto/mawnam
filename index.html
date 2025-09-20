@@ -21,7 +21,6 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     /* Navbar */
     .navbar {
       display: flex; justify-content: space-between; align-items: center;
@@ -47,7 +46,6 @@
     .signup-btn:hover { background-color: #a00000; }
     .admin-btn { background-color: #333; color: #fff; }
     .admin-btn:hover { background-color: #111; }
-
     /* Main Content */
     .main-content {
       flex: 1; display: flex; flex-direction: column;
@@ -67,7 +65,6 @@
     .rent-btn:hover { background-color: #333; transform: scale(1.05); }
     .topup-btn { background-color: #fff; color: #d60000; border: 2px solid #d60000; }
     .topup-btn:hover { background-color: #d60000; color: #fff; transform: scale(1.05); }
-
     /* Section */
     .section {
       padding: 100px 20px;
@@ -104,7 +101,6 @@
       <a href="#" class="signup-btn" id="logoutBtn" style="display:none;" onclick="logout()">ออกจากระบบ</a>
     </div>
   </div>
-
   <!-- Main Content -->
   <div class="main-content">
     <div class="main-title">Mawnam Studio</div>
@@ -114,13 +110,11 @@
       <button class="topup-btn" onclick="openTopup()">💰 เติมเงิน</button>
     </div>
   </div>
-
   <!-- ✅ Section (เหลือเฉพาะการติดต่อ) -->
   <div class="section">
     <h2>ติดต่อเรา</h2>
-    <p>📧 example@email.com<br>📞 012-345-6789</p>
+    <p>📧 lohmaytineeguynopparat@email.com<br>📞 064-701-2465</p>
   </div>
-
   <script>
     // ✅ อัปเดตเมนูตามสถานะ login
     document.addEventListener("DOMContentLoaded", () => {
@@ -129,7 +123,6 @@
         document.getElementById("loginBtn").style.display = "none";
         document.getElementById("registerBtn").style.display = "none";
         document.getElementById("logoutBtn").style.display = "inline-block";
-
         // ✅ ถ้า user = admin ให้โชว์เมนู Admin
         if (currentUser === "admin") {
           document.getElementById("adminMenu").style.display = "inline-block";
@@ -152,16 +145,13 @@
 <!-- ✅ Music Background -->
 <audio id="bgMusic" autoplay loop>
   <source src="music.mp3" type="audio/mpeg">
-  เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
 </audio>
-
 <!-- ✅ Control UI -->
 <div style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 10px; z-index: 9999; color:white;">
   <button onclick="changeVolume(-0.1)">🔉 เบา</button>
   <button onclick="changeVolume(0.1)">🔊 ดัง</button>
   <button onclick="toggleMute()">⏯️ ปิด/เปิด</button>
 </div>
-
 <script>
   const bgMusic = document.getElementById("bgMusic");
   bgMusic.volume = 0.5; // ✅ ตั้งค่าเสียงเริ่มต้นครึ่งหนึ่ง
@@ -170,7 +160,6 @@
     let newVolume = Math.min(1, Math.max(0, bgMusic.volume + change));
     bgMusic.volume = newVolume;
   }
-
   function toggleMute() {
     bgMusic.muted = !bgMusic.muted;
   }
