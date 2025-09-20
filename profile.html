@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>โปรไฟล์ผู้ใช้</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>โปรไฟล์ผู้ใช้ - Mawnam Studio</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(-45deg, #d60000, #000000, #ffffff, #111111);
       background-size: 400% 400%;
       animation: flowBG 15s ease infinite;
-      color: #fff;
+      color: #111;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      padding: 50px 20px;
       min-height: 100vh;
+      margin: 0;
     }
     @keyframes flowBG {
       0% { background-position: 0% 50%; }
@@ -23,48 +23,52 @@
       100% { background-position: 0% 50%; }
     }
     .profile-box {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.95);
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      width: 100%;
-      max-width: 400px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
       text-align: center;
+      width: 350px;
     }
-    .profile-box img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-bottom: 15px;
+    .profile-box h2 {
+      color: #d60000;
+      margin-bottom: 20px;
     }
-    .profile-box h2 { margin-bottom: 15px; }
-    .profile-box p { margin: 8px 0; font-size: 16px; }
-    .btn {
-      padding: 10px 20px;
+    .profile-box p {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+    .profile-box button {
       margin-top: 15px;
+      padding: 10px 18px;
+      font-size: 14px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 14px;
       font-weight: bold;
+      transition: background 0.3s;
     }
-    .btn-change { background: #d60000; color: #fff; }
+    .btn-change {
+      background: #d60000;
+      color: #fff;
+    }
     .btn-change:hover { background: #a00000; }
-    .btn-back { background: #333; color: #fff; margin-top: 10px; }
+    .btn-back {
+      background: #333;
+      color: #fff;
+    }
     .btn-back:hover { background: #111; }
   </style>
 </head>
 <body>
   <div class="profile-box">
-    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
-    <h2>ข้อมูลโปรไฟล์</h2>
-    <p><b>ชื่อผู้ใช้:</b> <span id="pfUsername"></span></p>
-    <p><b>รหัสผ่าน:</b> <span id="pfPassword">******</span></p>
-    <p><b>ยอดเงินคงเหลือ:</b> <span id="pfBalance"></span> บาท</p>
+    <h2>👤 โปรไฟล์ผู้ใช้</h2>
+    <p><b>ชื่อผู้ใช้:</b> <span id="profileUsername"></span></p>
+    <p><b>รหัสผ่าน:</b> <span id="profilePassword"></span></p>
+    <p><b>ยอดเงินคงเหลือ:</b> <span id="profileBalance"></span> บาท</p>
 
-    <button class="btn btn-change" onclick="changePassword()">🔑 เปลี่ยนรหัสผ่าน</button>
-    <br>
-    <a href="index.html"><button class="btn btn-back">⬅️ กลับหน้าหลัก</button></a>
+    <button class="btn-change" onclick="changePassword()">🔑 เปลี่ยนรหัสผ่าน</button>
+    <button class="btn-back" onclick="window.location.href='index2.html'">⬅️ กลับ</button>
   </div>
 
   <script>
@@ -73,29 +77,32 @@
       const users = JSON.parse(localStorage.getItem("users")) || [];
       let user = users.find(u => u.username === currentUser);
 
-      if (!currentUser || !user) {
-        alert("กรุณาเข้าสู่ระบบก่อนเข้าหน้านี้");
+      if (!user) {
+        alert("กรุณาเข้าสู่ระบบก่อน!");
         window.location.href = "login.html";
         return;
       }
 
-      document.getElementById("pfUsername").textContent = user.username;
-      document.getElementById("pfBalance").textContent = user.balance;
+      document.getElementById("profileUsername").textContent = user.username;
+      document.getElementById("profilePassword").textContent = user.password;
+      document.getElementById("profileBalance").textContent = user.balance;
     });
 
     function changePassword() {
-      const newPass = prompt("กรอกรหัสผ่านใหม่:");
-      if (newPass && newPass.length >= 4) {
-        const currentUser = localStorage.getItem("currentUser");
+      let newPass = prompt("กรอกรหัสผ่านใหม่:");
+      if (newPass && newPass.trim().length >= 4) {
+        let currentUser = localStorage.getItem("currentUser");
         let users = JSON.parse(localStorage.getItem("users")) || [];
         let user = users.find(u => u.username === currentUser);
+
         if (user) {
           user.password = newPass;
           localStorage.setItem("users", JSON.stringify(users));
-          alert("เปลี่ยนรหัสผ่านเรียบร้อย ✅");
+          alert("เปลี่ยนรหัสผ่านสำเร็จ!");
+          document.getElementById("profilePassword").textContent = newPass;
         }
       } else {
-        alert("รหัสผ่านต้องมีอย่างน้อย 4 ตัวอักษร ❌");
+        alert("รหัสผ่านต้องมีอย่างน้อย 4 ตัวอักษร");
       }
     }
   </script>
