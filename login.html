@@ -106,14 +106,14 @@
 
   <div class="login-box">
     <h2>เข้าสู่ระบบ</h2>
-    <form>
+    <form action="login_process.php" method="POST">
       <div class="form-group">
         <label for="username">ชื่อผู้ใช้</label>
-        <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้">
+        <input type="text" id="username" name="username" placeholder="กรอกชื่อผู้ใช้" required>
       </div>
       <div class="form-group">
         <label for="password">รหัสผ่าน</label>
-        <input type="password" id="password" placeholder="กรอกรหัสผ่าน">
+        <input type="password" id="password" name="password" placeholder="กรอกรหัสผ่าน" required>
       </div>
       <button type="submit" class="btn">เข้าสู่ระบบ</button>
     </form>
@@ -121,5 +121,7 @@
       ยังไม่มีบัญชีผู้ใช้? <a href="register.html">สมัครสมาชิก</a>
     </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
