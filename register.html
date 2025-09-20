@@ -1,20 +1,134 @@
-<h2>สมัครสมาชิก</h2>
-<form onsubmit="registerUser(event)">
-  <input type="text" id="username" placeholder="ชื่อผู้ใช้" required>
-  <input type="password" id="password" placeholder="รหัสผ่าน" required>
-  <button type="submit">สมัครสมาชิก</button>
-</form>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สมัครสมาชิก</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(-45deg, #d60000, #000, #fff, #111);
+      background-size: 400% 400%;
+      animation: flowBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-<script>
-  function registerUser(event) {
-    event.preventDefault(); // ไม่ให้รีเฟรชหน้า
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    @keyframes flowBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-    // เก็บข้อมูลใน localStorage
-    localStorage.setItem("user_" + username, password);
+    .login-box {
+      background: #fff;
+      padding: 40px 35px;
+      border-radius: 12px;
+      width: 380px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+    }
 
-    alert("สมัครสมาชิกสำเร็จ!");
-    window.location.href = "login.html"; // ย้ายไปหน้า login
-  }
-</script>
+    .login-box h2 {
+      margin-bottom: 30px;
+      color: #d60000;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      transition: all 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border: 1px solid #d60000;
+      box-shadow: 0 0 5px rgba(214,0,0,0.3);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #d60000;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 5px;
+    }
+
+    .btn:hover {
+      background: #a00000;
+      transform: translateY(-1px);
+    }
+
+    .register-link {
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+      color: #444;
+    }
+
+    .register-link a {
+      color: #d60000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>สมัครสมาชิก</h2>
+    <form onsubmit="registerUser(event)">
+      <input type="text" id="username" placeholder="ชื่อผู้ใช้" required>
+      <input type="password" id="password" placeholder="รหัสผ่าน" required>
+      <button type="submit">สมัครสมาชิก</button>
+    </form>
+  </div>
+
+  <script>
+    function registerUser(event) {
+      event.preventDefault(); // ไม่ให้รีเฟรชหน้า
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // เก็บข้อมูลใน localStorage
+      localStorage.setItem("user_" + username, password);
+
+      alert("สมัครสมาชิกสำเร็จ!");
+      
+      // ใช้ setTimeout เพื่อให้ alert แสดงก่อน redirect
+      setTimeout(() => {
+        window.location.href = "login.html"; // ไปหน้า login
+      }, 100);
+    }
+  </script>
+</body>
+</html>
