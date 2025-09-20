@@ -104,7 +104,7 @@
       gap: 20px;
       justify-content: center;
     }
-    .action-buttons button {
+    .action-buttons a, .action-buttons button {
       padding: 14px 24px;
       border: none;
       border-radius: 10px;
@@ -112,6 +112,8 @@
       font-weight: bold;
       cursor: pointer;
       transition: background 0.3s, transform 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
     }
     .rent-btn {
       background-color: #111;
@@ -187,11 +189,12 @@
         <img src="https://i.pinimg.com/1200x/01/bf/c6/01bfc695c8d21b410eafa7a1bd3bbd73.jpg" alt="Logo">
       </div>
       <a href="index.html">หน้าหลัก</a>
-      <a href="#">เข้าสู่เว็บไซต์</a>
+      <a href="index2.html">เข้าสู่เว็บไซต์</a>
     </div>
     <div class="nav-right">
-      <a href="login.html" class="login-btn">เข้าสู่ระบบ</a>
-      <a href="register.html" class="signup-btn">+ สมัครสมาชิก</a>
+      <a href="login.html" class="login-btn" id="loginBtn">เข้าสู่ระบบ</a>
+      <a href="register.html" class="signup-btn" id="registerBtn">+ สมัครสมาชิก</a>
+      <a href="#" class="signup-btn" id="logoutBtn" style="display:none;" onclick="logout()">ออกจากระบบ</a>
     </div>
   </div>
 
@@ -200,7 +203,7 @@
     <div class="main-title">Mawnam Studio</div>
     <div class="main-subtitle">ระบบเว็บไซต์สำหรับการใช้งาน</div>
     <div class="action-buttons">
-      <button class="rent-btn" onclick="alert('เข้าสู่หน้าหลัก')">🔧 เข้าสู่หน้าหลัก</button>
+      <a href="index2.html" class="rent-btn">🔧 เข้าสู่หน้าหลัก</a>
       <button class="topup-btn" onclick="openTopup()">💰 เติมเงิน</button>
     </div>
   </div>
@@ -240,5 +243,26 @@
       document.getElementById("qrText").innerText = `จำนวนเงิน ${amount} บาท`;
       document.getElementById("qrBox").style.display = "block";
     }
-  </script>f
+
+    // ✅ จัดการแสดงผล login/register หรือ logout
+    document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = localStorage.getItem("currentUser");
+      if (currentUser) {
+        document.getElementById("loginBtn").style.display = "none";
+        document.getElementById("registerBtn").style.display = "none";
+        document.getElementById("logoutBtn").style.display = "inline-block";
+      } else {
+        document.getElementById("loginBtn").style.display = "inline-block";
+        document.getElementById("registerBtn").style.display = "inline-block";
+        document.getElementById("logoutBtn").style.display = "none";
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem("currentUser");
+      alert("ออกจากระบบแล้ว");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
 </html>
