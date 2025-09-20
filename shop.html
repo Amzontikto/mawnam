@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ร้านค้า - Mawnam Studio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle, #ff0000, #000000 80%);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      min-height: 100vh;
+    }
+    h2 {
+      color: #ff4d4d;
+      margin-bottom: 20px;
+    }
+    .box {
+      background: rgba(0,0,0,0.6);
+      border: 2px solid #ff3333;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 20px auto;
+      max-width: 400px;
+    }
+    button {
+      background: #ff3333;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #cc0000;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+    #itemImg {
+      margin-top: 15px;
+      max-width: 200px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎁 ร้านค้า - กล่องสุ่มสินค้า</h2>
+  <div class="box">
+    <p>กดปุ่มด้านล่างเพื่อเปิดกล่องสุ่ม</p>
+    <button onclick="openBox()">เปิดกล่อง (50 บาท)</button>
+    <div id="result"></div>
+    <img id="itemImg" alt="item">
+  </div>
+
+  <script>
+    function openBox() {
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser) {
+        alert("กรุณาเข้าสู่ระบบก่อน");
+        window.location.href = "login.html";
+        return;
+      }
+
+      if (!currentUser.balance || currentUser.balance < 50) {
+        alert("ยอดเงินไม่เพียงพอ กรุณาเติมเงิน");
+        return;
+      }
+
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+      if (products.length === 0) {
+        alert("❌ ยังไม่มีสินค้าในระบบ");
+        return;
+      }
+
+      // ตัดเงิน
+      currentUser.balance -= 50;
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+      // บันทึก balance กลับไปที่ users ทั้งหมด
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      let idx = users.findIndex(u => u.username === currentUser.username);
+      if (idx !== -1) {
+        users[idx].balance = currentUser.balance;
+        localStorage.setItem("users", JSON.stringify(users));
+      }
+
+      // สุ่มตามโอกาส (chance)
+      let totalChance = products.reduce((sum, p) => sum + Number(p.chance), 0);
+      let rand = Math.random() * totalChance;
+      let cumulative = 0;
+      let selected = null;
+
+      for (let p of products) {
+        cumulative += Number(p.chance);
+        if (rand <= cumulative) {
+          selected = p;
+          break;
+        }
+      }
+
+      // แสดงผลลัพธ์
+      let resultDiv = document.getElementById("result");
+      let imgEl = document.getElementById("itemImg");
+
+      resultDiv.textContent = "คุณได้รับ: " + selected.name + " 🎉";
+      imgEl.src = selected.image;
+      imgEl.style.display = "block";
+
+      // เก็บประวัติการซื้อ
+      let purchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+      purchaseHistory.push({
+        username: currentUser.username,
+        item: selected.name,
+        image: selected.image,
+        date: new Date().toLocaleString()
+      });
+      localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
+    }
+  </script>
+</body>
+</html>
