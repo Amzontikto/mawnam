@@ -1,14 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mawnam Studio - หน้าเว็บไซต์</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(-45deg, #d60000, #000000, #ffffff, #111111);
+      background-size: 400% 400%;
+      animation: flowBG 15s ease infinite;
+      color: #111;
+    }
+    @keyframes flowBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      border-bottom: 1px solid #e0e0e0;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+    .nav-left a {
+      text-decoration: none;
+      color: #111;
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.3s;
+    }
+    .nav-left a:hover { color: #d60000; }
+    .nav-logo img { height: 35px; }
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .main-title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .main-subtitle {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 35px;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .action-buttons a, .action-buttons button {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .rent-btn {
+      background-color: #111;
+      color: white;
+    }
+    .rent-btn:hover { background-color: #333; transform: scale(1.05); }
+    .topup-btn {
+      background-color: #fff;
+      color: #d60000;
+      border: 2px solid #d60000;
+    }
+    .topup-btn:hover {
+      background-color: #d60000;
+      color: #fff;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-    <script>
-        document.write("Hello World");
-    </script>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="nav-left">
+      <div class="nav-logo">
+        <img src="https://i.pinimg.com/1200x/01/bf/c6/01bfc695c8d21b410eafa7a1bd3bbd73.jpg" alt="Logo">
+      </div>
+      <a href="index.html">หน้าหลัก</a>
+      <!-- ❌ เอาออก: เข้าสู่เว็บไซต์, login, register, logout -->
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="main-title">Mawnam Studio</div>
+    <div class="main-subtitle">หน้านี้เป็นหน้าภายในเว็บไซต์</div>
+    <div class="action-buttons">
+      <a href="#" class="rent-btn">🔧 เมนูหลัก</a>
+      <button class="topup-btn" onclick="alert('ฟังก์ชันเติมเงินอยู่ในระหว่างพัฒนา')">💰 เติมเงิน</button>
+    </div>
+  </div>
 </body>
-<script src="script.js"></script>
 </html>
