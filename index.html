@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mawnam Studio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(270deg, #ff0000, #111, #222, #ff0000);
+      background-size: 600% 600%;
+      animation: oceanMove 20s ease infinite;
+    }
+
+    @keyframes oceanMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 10px 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-left a {
+      text-decoration: none;
+      color: #111;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    .nav-left a:hover {
+      color: #d60000;
+    }
+
+    .nav-logo img {
+      height: 35px;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-right a {
+      padding: 6px 15px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background 0.3s, color 0.3s;
+      display: inline-block;
+    }
+
+    .login-btn {
+      background-color: #e0e0e0;
+      color: #000;
+    }
+
+    .login-btn:hover {
+      background-color: #d60000;
+      color: #fff;
+    }
+
+    .signup-btn {
+      background-color: #d60000;
+      color: white;
+    }
+
+    .signup-btn:hover {
+      background-color: #a00000;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .main-title {
+      font-size: 40px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .main-subtitle {
+      font-size: 18px;
+      color: #f0f0f0;
+      margin-bottom: 25px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .action-buttons button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s;
+    }
+
+    .rent-btn {
+      background-color: #111;
+      color: white;
+    }
+
+    .rent-btn:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+
+    .topup-btn {
+      background-color: #fff;
+      color: #d60000;
+      border: 2px solid #d60000;
+    }
+
+    .topup-btn:hover {
+      background-color: #d60000;
+      color: #fff;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="nav-left">
+      <div class="nav-logo">
+        <img src="https://www.svgrepo.com/show/354202/web.svg" alt="Logo">
+      </div>
+      <a href="#">หน้าหลัก</a>
+      <a href="#">เข้าสู่เว็บไซต์</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html" class="login-btn">เข้าสู่ระบบ</a>
+      <a href="register.html" class="signup-btn">+ สมัครสมาชิก</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="main-title">Mawnam Studio</div>
+    <div class="main-subtitle">TEST</div>
+    <div class="action-buttons">
+      <button class="rent-btn" onclick="alert('เข้าสู่หน้าหลัก')">🔧 เข้้าสู่หน้าหลัก</button>
+      <button class="topup-btn" onclick="alert('ระบบเติมเงินยังไม่เปิดให้บริการ')">💰 เติมเงิน</button>
+    </div>
+  </div>
+
+</body>
+</html>

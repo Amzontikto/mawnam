@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สมัครสมาชิก</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff0000, #111);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .register-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      width: 380px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    .register-box h2 {
+      margin-bottom: 25px;
+      color: #d60000;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #222;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+      background: #f7f7f7;
+      font-size: 14px;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border: 1px solid #d60000;
+      background: #fff;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #d60000;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #a00000;
+    }
+
+    .login-link {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #111;
+    }
+
+    .login-link a {
+      color: #d60000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-box">
+    <h2>สมัครสมาชิก</h2>
+    <form>
+      <div class="form-group">
+        <label>ชื่อผู้ใช้</label>
+        <input type="text" placeholder="ระบุชื่อผู้ใช้ของคุณ">
+      <div class="form-group">
+        <label>รหัสผ่าน</label>
+        <input type="password" placeholder="ระบุรหัสผ่าน">
+      </div>
+      <div class="form-group">
+        <label>ยืนยันรหัสผ่าน</label>
+        <input type="password" placeholder="ระบุรหัสผ่านอีกครั้ง">
+      </div>
+      <button type="button" class="btn" onclick="window.location.href='index.html'">
+  สมัครสมาชิก
+</button>
+    </form>
+    <div class="login-link">
+      มีบัญชีอยู่แล้ว? <a href="#">เข้าสู่ระบบ</a>
+    </div>
+  </div>
+
+</body>
+</html>
