@@ -27,9 +27,7 @@
       text-align: center;
       font-size: 22px;
     }
-    .form-group {
-      margin-bottom: 20px;
-    }
+    .form-group { margin-bottom: 20px; }
     .form-group label {
       display: block;
       margin-bottom: 8px;
@@ -57,9 +55,7 @@
       cursor: pointer;
       transition: 0.3s;
     }
-    .btn:hover {
-      background: #a00000;
-    }
+    .btn:hover { background: #a00000; }
     .register-link {
       margin-top: 20px;
       font-size: 14px;
@@ -71,8 +67,6 @@
       text-decoration: none;
       font-weight: bold;
     }
-
-    /* ✅ Popup animation */
     @keyframes popIn {
       from { transform: scale(0.8); opacity: 0; }
       to   { transform: scale(1); opacity: 1; }
@@ -102,12 +96,10 @@
   <div id="successModal" style="
     display:none; justify-content:center; align-items:center;
     position:fixed; top:0; left:0; width:100%; height:100%;
-    background:rgba(0,0,0,0.6); z-index:2000;
-  ">
+    background:rgba(0,0,0,0.6); z-index:2000;">
     <div style="
       background:white; padding:30px 40px; border-radius:15px;
-      text-align:center; animation:popIn 0.4s ease;
-    ">
+      text-align:center; animation:popIn 0.4s ease;">
       <h2 style="color:green;">✅ เข้าสู่ระบบสำเร็จ!</h2>
       <p>กำลังนำคุณไปยังหน้าหลัก...</p>
     </div>
@@ -115,7 +107,7 @@
 
   <script>
     function loginUser(event) {
-      event.preventDefault(); 
+      event.preventDefault();
 
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
@@ -124,30 +116,18 @@
       let found = users.find(u => u.username === username && u.password === password);
 
       if (found) {
-        // ✅ เก็บ user ปัจจุบันไว้ใน localStorage
-        localStorage.setItem("currentUser", found.username);
+        // ✅ เก็บ user object ทั้งหมด ไม่ใช่แค่ชื่อ
+        localStorage.setItem("currentUser", JSON.stringify(found));
 
-        // ✅ แสดง popup สำเร็จ
+        // ✅ แสดง popup แล้วเด้งไป index2.html
         document.getElementById("successModal").style.display = "flex";
         setTimeout(() => {
-          window.location.href = "index2.html"; 
-        }, 2000);
+          window.location.href = "index2.html";
+        }, 1500);
       } else {
         alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
       }
     }
   </script>
 </body>
-
-<!-- ✅ โหลด music-player.js -->
-<script src="music-player.js"></script>
-
-<!-- ✅ UI คุมเพลง -->
-<div style="position: fixed; bottom: 20px; right: 20px;
-            background: rgba(0,0,0,0.7); padding: 10px;
-            border-radius: 10px; z-index: 9999; color:white;">
-  <button onclick="changeVolume(-0.1)">🔉 เบา</button>
-  <button onclick="changeVolume(0.1)">🔊 ดัง</button>
-  <button onclick="toggleMute()">⏯️ ปิด/เปิด</button>
-</div>
 </html>
