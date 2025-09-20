@@ -2,55 +2,160 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
-    h1 { color: #d60000; }
-    .card { background: #fff; padding: 20px; margin: 15px 0; border-radius: 8px; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    table, th, td { border: 1px solid #ccc; }
-    th, td { padding: 10px; text-align: center; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #d60000;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      margin-top: 30px;
+      color: #d60000;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table th, table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    table th {
+      background: #f2f2f2;
+    }
+    .stat-box {
+      display: inline-block;
+      background: #fff;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      min-width: 200px;
+      text-align: center;
+    }
+    .logout-btn {
+      margin-top: 20px;
+      background: #d60000;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .logout-btn:hover {
+      background: #a00000;
+    }
   </style>
 </head>
 <body>
-  <h1>📊 Admin Panel</h1>
+  <header>
+    <h1>📊 Admin Dashboard</h1>
+  </header>
 
-  <div class="card">
-    <h2>👥 รายชื่อสมาชิก</h2>
-    <table id="userTable">
-      <tr><th>ชื่อผู้ใช้</th><th>รหัสผ่าน</th></tr>
+  <div class="container">
+    <h2>👥 สมาชิกที่สมัครแล้ว</h2>
+    <table id="membersTable">
+      <tr>
+        <th>ชื่อผู้ใช้</th>
+      </tr>
     </table>
-  </div>
 
-  <div class="card">
-    <h2>💰 ยอดเติมเงินรวม</h2>
-    <p id="totalTopup">0 บาท</p>
-  </div>
+    <h2>💰 สถิติการเติมเงิน</h2>
+    <div class="stat-box">
+      <h3 id="totalTopup">0 บาท</h3>
+      <p>ยอดเติมเงินรวมทั้งหมด</p>
+    </div>
 
-  <div class="card">
-    <h2>📦 ของในเว็บ</h2>
-    <ul id="items">
-      <li>Item 1</li>
-      <li>Item 2</li>
-      <li>Item 3</li>
-    </ul>
+    <h2>🧾 ประวัติการเติมเงิน</h2>
+    <table id="topupTable">
+      <tr>
+        <th>จำนวนเงิน</th>
+        <th>เวลา</th>
+      </tr>
+    </table>
+
+    <h2>📦 ของในเว็บ (Dummy)</h2>
+    <table>
+      <tr><th>สินค้า</th><th>ราคา</th><th>จำนวน</th></tr>
+      <tr><td>Item A</td><td>100 บาท</td><td>20</td></tr>
+      <tr><td>Item B</td><td>250 บาท</td><td>10</td></tr>
+      <tr><td>Item C</td><td>500 บาท</td><td>5</td></tr>
+    </table>
+
+    <button class="logout-btn" onclick="goHome()">🔙 กลับหน้าหลัก</button>
   </div>
 
   <script>
-    // ดึง users จาก localStorage
-    let table = document.getElementById("userTable");
-    for(let key in localStorage){
-      if(key.startsWith("user_")){
+    // ✅ โหลดสมาชิกจาก localStorage
+    function loadMembers() {
+      let table = document.getElementById("membersTable");
+      let found = false;
+      for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        if (key.startsWith("user_")) {
+          let username = key.replace("user_", "");
+          let row = table.insertRow();
+          row.insertCell(0).innerText = username;
+          found = true;
+        }
+      }
+      if (!found) {
         let row = table.insertRow();
-        row.insertCell(0).innerText = key.replace("user_","");
-        row.insertCell(1).innerText = localStorage.getItem(key);
+        row.insertCell(0).innerText = "ยังไม่มีสมาชิก";
       }
     }
 
-    // ดึง topups
-    let topups = JSON.parse(localStorage.getItem("topups")) || [];
-    let total = topups.reduce((sum, t) => sum + t.amount, 0);
-    document.getElementById("totalTopup").innerText = total + " บาท";
+    // ✅ โหลดข้อมูลการเติมเงิน
+    function loadTopups() {
+      let table = document.getElementById("topupTable");
+      let topups = JSON.parse(localStorage.getItem("topups")) || [];
+      let total = 0;
+
+      if (topups.length > 0) {
+        topups.forEach(t => {
+          let row = table.insertRow();
+          row.insertCell(0).innerText = t.amount + " บาท";
+          row.insertCell(1).innerText = t.time;
+          total += t.amount;
+        });
+      } else {
+        let row = table.insertRow();
+        row.insertCell(0).innerText = "-";
+        row.insertCell(1).innerText = "ยังไม่มีการเติมเงิน";
+      }
+
+      document.getElementById("totalTopup").innerText = total + " บาท";
+    }
+
+    function goHome() {
+      window.location.href = "index.html";
+    }
+
+    // โหลดเมื่อเปิดหน้า
+    document.addEventListener("DOMContentLoaded", () => {
+      loadMembers();
+      loadTopups();
+    });
   </script>
 </body>
 </html>
