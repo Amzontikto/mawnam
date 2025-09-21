@@ -2,170 +2,89 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
+  <title>Admin Panel</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
       margin: 0;
-      padding: 0;
-      color: #333;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #111;
+      color: white;
     }
-    header {
-      background: #d60000;
-      color: #fff;
-      padding: 15px;
+    .sidebar {
+      width: 220px;
+      background: #222;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 {
+      margin-bottom: 20px;
+      color: #ff4c4c;
       text-align: center;
     }
-    .container {
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h2 {
-      margin-top: 30px;
-      color: #d60000;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    table th, table td {
+    .sidebar a {
       padding: 12px;
-      border: 1px solid #ddd;
-      text-align: center;
+      margin: 5px 0;
+      color: white;
+      text-decoration: none;
+      display: block;
+      border-radius: 6px;
+      transition: background 0.3s;
     }
-    table th {
-      background: #f2f2f2;
-    }
-    .stat-box {
-      display: inline-block;
-      background: #fff;
-      padding: 20px;
-      margin: 10px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      min-width: 200px;
-      text-align: center;
-    }
-    .logout-btn {
-      margin-top: 20px;
+    .sidebar a:hover {
       background: #d60000;
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
     }
-    .logout-btn:hover {
-      background: #a00000;
+    .content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .card {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #444;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>📊 Admin Dashboard</h1>
-  </header>
-
-  <div class="container">
-    <h2>👥 สมาชิกที่สมัครแล้ว</h2>
-    <table id="membersTable">
-      <tr>
-        <th>ชื่อผู้ใช้</th>
-      </tr>
-    </table>
-
-    <h2>💰 สถิติการเติมเงิน</h2>
-    <div class="stat-box">
-      <h3 id="totalTopup">0 บาท</h3>
-      <p>ยอดเติมเงินรวมทั้งหมด</p>
-    </div>
-
-    <h2>🧾 ประวัติการเติมเงิน</h2>
-    <table id="topupTable">
-      <tr>
-        <th>จำนวนเงิน</th>
-        <th>เวลา</th>
-      </tr>
-    </table>
-
-    <h2>📦 ของในเว็บ (Dummy)</h2>
-    <table>
-      <tr><th>สินค้า</th><th>ราคา</th><th>จำนวน</th></tr>
-      <tr><td>Item A</td><td>100 บาท</td><td>20</td></tr>
-      <tr><td>Item B</td><td>250 บาท</td><td>10</td></tr>
-      <tr><td>Item C</td><td>500 บาท</td><td>5</td></tr>
-    </table>
-
-    <button class="logout-btn" onclick="goHome()">🔙 กลับหน้าหลัก</button>
+  <div class="sidebar">
+    <h2>⚙️ Admin</h2>
+    <a href="#" onclick="showPage('users')">👥 ผู้ใช้</a>
+    <a href="#" onclick="showPage('products')">🛒 สินค้า</a>
+    <a href="#" onclick="showPage('topup')">💰 เติมเงิน</a>
+    <a href="#" onclick="showPage('reports')">📊 รายงาน</a>
+    <a href="#" onclick="showPage('settings')">⚙️ ตั้งค่า</a>
+    <a href="login.html">🚪 ออกจากระบบ</a>
+  </div>
+  <div class="content" id="content">
+    <h1>ยินดีต้อนรับสู่ระบบแอดมิน</h1>
+    <p>เลือกเมนูทางซ้ายเพื่อจัดการระบบ</p>
   </div>
 
   <script>
-    // ✅ โหลดสมาชิกจาก localStorage
-    function loadMembers() {
-      let table = document.getElementById("membersTable");
-      let found = false;
-      for (let i = 0; i < localStorage.length; i++) {
-        let key = localStorage.key(i);
-        if (key.startsWith("user_")) {
-          let username = key.replace("user_", "");
-          let row = table.insertRow();
-          row.insertCell(0).innerText = username;
-          found = true;
-        }
+    function showPage(page) {
+      let html = "";
+      if (page === "users") {
+        html = `<div class="card"><h2>👥 จัดการผู้ใช้</h2><p>ฟีเจอร์: แก้ไข/ลบ/เพิ่มเครดิต</p></div>`;
       }
-      if (!found) {
-        let row = table.insertRow();
-        row.insertCell(0).innerText = "ยังไม่มีสมาชิก";
+      else if (page === "products") {
+        html = `<div class="card"><h2>🛒 จัดการสินค้า</h2><p>ฟีเจอร์: เพิ่ม/ลบ/แก้ไขสินค้า</p></div>`;
       }
-    }
-
-    // ✅ โหลดข้อมูลการเติมเงิน
-    function loadTopups() {
-      let table = document.getElementById("topupTable");
-      let topups = JSON.parse(localStorage.getItem("topups")) || [];
-      let total = 0;
-
-      if (topups.length > 0) {
-        topups.forEach(t => {
-          let row = table.insertRow();
-          row.insertCell(0).innerText = t.amount + " บาท";
-          row.insertCell(1).innerText = t.time;
-          total += t.amount;
-        });
-      } else {
-        let row = table.insertRow();
-        row.insertCell(0).innerText = "-";
-        row.insertCell(1).innerText = "ยังไม่มีการเติมเงิน";
+      else if (page === "topup") {
+        html = `<div class="card"><h2>💰 จัดการเติมเงิน</h2><p>ฟีเจอร์: ดูประวัติการเติมเงิน / อนุมัติ</p></div>`;
       }
-
-      document.getElementById("totalTopup").innerText = total + " บาท";
+      else if (page === "reports") {
+        html = `<div class="card"><h2>📊 รายงาน</h2><p>ฟีเจอร์: สรุปยอดขาย / รายได้</p></div>`;
+      }
+      else if (page === "settings") {
+        html = `<div class="card"><h2>⚙️ ตั้งค่า</h2><p>ฟีเจอร์: ข้อมูลร้าน / เปลี่ยนรหัสผ่าน</p></div>`;
+      }
+      document.getElementById("content").innerHTML = html;
     }
-
-    function goHome() {
-      window.location.href = "index.html";
-    }
-
-    // โหลดเมื่อเปิดหน้า
-    document.addEventListener("DOMContentLoaded", () => {
-      loadMembers();
-      loadTopups();
-    });
   </script>
 </body>
-<script src="music-player.js"></script>
-
-<!-- UI คุมเพลง -->
-<div style="position: fixed; bottom: 20px; right: 20px;
-            background: rgba(0,0,0,0.7); padding: 10px;
-            border-radius: 10px; z-index: 9999; color:white;">
-  <button onclick="changeVolume(-0.1)">🔉 เบา</button>
-  <button onclick="changeVolume(0.1)">🔊 ดัง</button>
-  <button onclick="toggleMute()">⏯️ ปิด/เปิด</button>
-</div>
 </html>
