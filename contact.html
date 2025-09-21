@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ติดต่อเรา | Mawnam Studio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: linear-gradient(135deg, #d60000, #000000);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contact-box {
+      background: #1a1a1a;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.6);
+      animation: fadeIn 0.4s ease;
+      text-align: center;
+    }
+
+    .contact-box h1 {
+      margin-bottom: 20px;
+      color: #ff3333;
+    }
+
+    .contact-box p {
+      font-size: 16px;
+      margin: 15px 0;
+    }
+
+    .contact-box a {
+      color: #ff3333;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .contact-box a:hover {
+      color: #ff6666;
+      text-shadow: 0 0 8px #ff3333;
+    }
+
+    /* ปุ่มกลับ */
+    .back-btn {
+      display: block;
+      margin: 30px auto 0 auto; /* ตรงกลางด้านล่าง */
+      padding: 12px 25px;
+      background: #ff3333;
+      color: white !important; /* ให้ตัวอักษรแสดงแน่นอน */
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      width: fit-content;
+      transition: 0.3s;
+    }
+    .back-btn:hover {
+      background: #ff6666;
+      box-shadow: 0 0 10px #ff3333;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-box">
+    <h1>📞 ติดต่อเรา</h1>
+    <p><strong>โทร:</strong> <a href="tel:0123456789">012-345-6789</a></p>
+    <p><strong>Line:</strong> <a href="https://line.me/ti/p/yourlineid" target="_blank">@yourlineid</a></p>
+    <p><strong>Email:</strong> <a href="mailto:mawnam@example.com">mawnam@example.com</a></p>
+    <p><strong>Facebook:</strong> <a href="https://facebook.com/yourpage" target="_blank">Mawnam Studio</a></p>
+
+    <!-- ปุ่มกลับหน้าหลัก -->
+    <a href="index2.html" class="back-btn">⬅ กลับไปหน้าหลัก</a>
+  </div>
+</body>
+</html>
