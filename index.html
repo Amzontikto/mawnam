@@ -3,221 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mawnam Studio</title>
+  <title>Mawnam</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
     body {
-      min-height: 100vh;
+      margin: 0;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-      color: #fff;
-      position: relative;
+      justify-content: center;
+      align-items: center;
+      background: #0d0000;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
     }
 
-    /* 🌊 พื้นหลัง Gradient เคลื่อนไหว */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(-45deg, #ff0000, #000000, #ffffff, #111111);
-      background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
-      z-index: -2;
-    }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* พื้นหลัง */
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,0,0,0.2) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: moveStars 20s linear infinite;
+      z-index: 0;
     }
 
-    /* 🌠 ดาวตก */
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
-      opacity: 0.15;
-      animation: moveStars 60s linear infinite;
-      z-index: -1;
-    }
     @keyframes moveStars {
       from { background-position: 0 0; }
-      to { background-position: -10000px 5000px; }
+      to { background-position: -1000px 1000px; }
     }
 
-    /* 🔻 Navbar */
-    .navbar {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 15px 40px;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
-      position: sticky; top: 0; z-index: 1000;
-      transition: all 0.3s ease;
-    }
-    .navbar.shrink {
-      padding: 6px 20px;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(12px);
-    }
-    .nav-left { display: flex; align-items: center; gap: 25px; }
-    .nav-left a {
-      text-decoration: none; color: #fff; font-weight: 500; font-size: 15px;
-      transition: color 0.3s;
-    }
-    .nav-left a:hover { color: #ff0000; }
-
-    .nav-logo img { height: 35px; transition: all 0.3s ease; }
-    .navbar.shrink .nav-logo img { height: 28px; }
-
-    .nav-right { display: flex; align-items: center; gap: 12px; }
-    .nav-right a, .nav-right button {
-      padding: 8px 18px; border-radius: 8px; text-decoration: none;
-      font-weight: bold; font-size: 14px; transition: 0.3s;
-      border: 1px solid transparent; cursor: pointer;
-    }
-    .login-btn { border: 1px solid #ccc; background: #f9f9f9; color: #000; }
-    .login-btn:hover { border-color: #ff0000; color: #ff0000; background: #fff; }
-    .signup-btn { background-color: #ff0000; color: #fff; }
-    .signup-btn:hover { background-color: #a00000; }
-    .logout-btn { background-color: #333; color: #fff; }
-    .logout-btn:hover { background-color: #111; }
-
-    /* 📦 Main Content */
-    .main-content {
-      flex: 1; display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      text-align: center; padding: 80px 20px;
-    }
-    .main-title { font-size: 48px; font-weight: bold; margin-bottom: 15px; color: #fff; text-shadow: 0 0 10px #000; }
-    .main-subtitle { font-size: 18px; color: #ddd; margin-bottom: 35px; }
-
-    .action-buttons { display: flex; gap: 20px; justify-content: center; }
-    .action-buttons a {
-      padding: 14px 24px; border-radius: 10px;
-      font-size: 16px; font-weight: bold; text-decoration: none;
-      transition: 0.3s; display: inline-block;
-    }
-    .rent-btn { background-color: #111; color: #fff; }
-    .rent-btn:hover { background-color: #333; transform: scale(1.05); }
-    .topup-btn { background-color: #fff; color: #ff0000; border: 2px solid #ff0000; }
-    .topup-btn:hover { background-color: #ff0000; color: #fff; transform: scale(1.05); }
-
-    /* ℹ️ User Info */
-    .user-info {
-      margin-top: 30px;
-      padding: 20px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      text-align: left;
-      max-width: 400px;
-      width: 100%;
-      color: #111;
-    }
-    .user-info h3 { margin-bottom: 10px; color: #ff0000; }
-    .user-info p { font-size: 16px; margin: 5px 0; }
-
-    /* 📞 Section */
-    .section {
-      padding: 100px 20px;
+    /* กล่องหลัก */
+    .container {
+      position: relative;
+      background: black;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px red;
       text-align: center;
+      width: 350px;
+      z-index: 1;
     }
-    .section h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: #fff;
+
+    /* โลโก้ GIF */
+    .logo img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid red;
+      box-shadow: 0 0 20px red;
     }
-    .section p {
-      font-size: 18px;
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.6;
-      color: #ddd;
+
+    h1 {
+      margin: 10px 0;
+      color: #ff1a1a;
+    }
+
+    .welcome {
+      margin: 15px 0;
+      padding: 10px;
+      border: 1px solid red;
+      border-radius: 10px;
+      color: #ff8080;
+    }
+
+    .btn {
+      display: block;
+      margin: 10px auto;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      width: 80%;
+      transition: all 0.3s;
+    }
+
+    .btn-login {
+      background: red;
+      color: white;
+    }
+
+    .btn-login:hover {
+      background: darkred;
+    }
+
+    .btn-guest {
+      background: #222;
+      color: #ff8080;
+      border: 1px solid red;
+    }
+
+    .btn-guest:hover {
+      background: #444;
     }
   </style>
 </head>
 <body>
-  <!-- 🔻 Navbar -->
-  <div class="navbar">
-    <div class="nav-left">
-      <div class="nav-logo">
-        <img src="https://i.pinimg.com/1200x/01/bf/c6/01bfc695c8d21b410eafa7a1bd3bbd73.jpg" alt="Logo">
-      </div>
-      <a href="index.html">หน้าหลัก</a>
-      <a href="index2.html">เข้าสู่เว็บไซต์</a>
-      <a href="admin.html" id="adminMenu" style="display:none;">Admin Panel</a>
+  <div class="background"></div>
+
+  <div class="container">
+    <div class="logo">
+      <!-- ใช้โลโก้ GIF -->
+      <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NGVidDRwYmhya2Q4eTExdm5kNWs4cmF5bXR6bWQ4aW81YW9yYmV5ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/aPoWIEaPPoCXpzelGV/giphy.gif" alt="Mawnam Logo">
     </div>
-    <div class="nav-right">
-      <a href="login.html" class="login-btn" id="loginBtn">เข้าสู่ระบบ</a>
-      <a href="register.html" class="signup-btn" id="registerBtn">+ สมัครสมาชิก</a>
-      <button class="logout-btn" id="logoutBtn" style="display:none;" onclick="logout()">ออกจากระบบ</button>
-    </div>
+    <h1>Mawnam</h1>
+    <div class="welcome">ยินดีต้อนรับสู่ร้านค้า</div>
+    <button class="btn btn-login" onclick="window.location.href='login.html'">➡️ เข้าสู่ระบบ</button>
+    <button class="btn btn-guest" onclick="window.location.href='index2.html'">🛒 เยี่ยมชมสินค้า</button>
   </div>
-
-  <!-- 🔻 Main Content -->
-  <div class="main-content">
-    <div class="main-title">Mawnam Studio</div>
-    <div class="main-subtitle">ระบบเว็บไซต์สำหรับการใช้งาน</div>
-    <div class="action-buttons">
-      <a href="index2.html" class="rent-btn">🔧 เข้าสู่หน้าหลัก</a>
-    </div>
-
-    <!-- ℹ️ User Info -->
-    <div class="user-info" id="userInfo" style="display:none;">
-      <h3>ข้อมูลผู้ใช้</h3>
-      <p><b>ชื่อผู้ใช้:</b> <span id="infoUsername"></span></p>
-      <p><b>รหัสผ่าน:</b> <span id="infoPassword"></span></p>
-      <p><b>ยอดเงินคงเหลือ:</b> <span id="infoBalance"></span> บาท</p>
-    </div>
-  </div>
-
-  <!-- 📞 Section -->
-  <div class="section">
-    <h2>ติดต่อเรา</h2>
-    <p>📧 lohmaytineeguynopparat@email.com<br>📞 064-701-2465</p>
-  </div>
-
-  <script>
-    // ✅ Navbar หดตอน scroll
-    window.addEventListener("scroll", function() {
-      const navbar = document.querySelector(".navbar");
-      if (window.scrollY > 50) {
-        navbar.classList.add("shrink");
-      } else {
-        navbar.classList.remove("shrink");
-      }
-    });
-
-    // ✅ อัปเดตเมนูตามสถานะ login
-    document.addEventListener("DOMContentLoaded", () => {
-      const currentUser = localStorage.getItem("currentUser");
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-
-      if (currentUser) {
-        document.getElementById("loginBtn").style.display = "none";
-        document.getElementById("registerBtn").style.display = "none";
-        document.getElementById("logoutBtn").style.display = "inline-block";
-
-        if (currentUser === "admin") {
-          document.getElementById("adminMenu").style.display = "inline-block";
-        }
-
-        let user = users.find(u => u.username === currentUser);
-        if (user) {
-          document.getElementById("userInfo").style.display = "block";
-          document.getElementById("infoUsername").textContent = user.username;
-          document.getElementById("infoPassword").textContent = user.password;
-          document.getElementById("infoBalance").textContent = user.balance;
-        }
-      }
-    });
-
-    function logout() {
-      localStorage.removeItem("currentUser");
-      alert("ออกจากระบบแล้ว");
-      window.location.href = "index.html";
-    }
-  </script>
 </body>
 </html>
