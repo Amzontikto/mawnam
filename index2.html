@@ -6,7 +6,6 @@
   <title>Mawnam Studio</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
-
     body {
       font-family: Arial, sans-serif;
       color: white;
@@ -15,8 +14,6 @@
       position: relative;
       min-height: 100vh;
     }
-
-    /* ===== พื้นหลังแดงดำเคลื่อนไหว ===== */
     body::before {
       content: "";
       position: fixed;
@@ -27,14 +24,11 @@
       animation: waterflow 8s ease infinite;
       z-index: -2;
     }
-
     @keyframes waterflow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
-    /* ===== ดาวตก ===== */
     .shooting-star {
       position: fixed;
       width: 2px;
@@ -50,8 +44,6 @@
       10% { opacity:1; }
       100% { transform: translate(400px,400px) rotate(45deg); opacity:0; }
     }
-
-    /* ===== Navbar โปร่งใส ===== */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -64,57 +56,37 @@
       z-index: 1000;
       backdrop-filter: blur(6px);
     }
-    .navbar .left {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .navbar img {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-    }
+    .navbar .left { display: flex; align-items: center; gap: 15px; }
+    .navbar img { width: 40px; height: 40px; border-radius: 50%; }
     .navbar a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
+      color: white; text-decoration: none; font-weight: bold;
       transition: color 0.3s;
     }
     .navbar a:hover { color: #ff3333; }
     .navbar .right { display: flex; align-items: center; gap: 15px; }
-
-    /* ===== Dropdown โปรไฟล์ ===== */
     .dropdown { position: relative; display: inline-block; }
     .dropbtn {
-      background: #990000;
-      color: white;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+      background: #990000; color: white;
+      padding: 8px 16px; border: none;
+      border-radius: 6px; cursor: pointer;
       font-weight: bold;
     }
     .dropdown-content {
       display: none;
-      position: absolute;
-      right: 0;
+      position: absolute; right: 0;
       background: rgba(20,20,20,0.95);
-      min-width: 200px;
-      border-radius: 10px;
+      min-width: 200px; border-radius: 10px;
       box-shadow: 0px 4px 10px rgba(0,0,0,0.6);
       z-index: 1001;
     }
     .dropdown-content a {
-      display: block;
-      padding: 12px;
-      color: red;
-      text-decoration: none;
+      display: block; padding: 12px;
+      color: red; text-decoration: none;
       border-bottom: 1px solid #333;
     }
     .dropdown-content a:last-child { border-bottom: none; }
     .dropdown-content a:hover { background: #330000; }
     .dropdown:hover .dropdown-content { display: block; }
-
-    /* ===== กล่องเนื้อหา ===== */
     .main { margin-top: 70px; padding: 40px; }
     .logo { width: 180px; margin-bottom: 20px; }
     h1 { font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #ff3333; }
@@ -139,6 +111,32 @@
       transition: background 0.3s;
     }
     .btn-category:hover { background: #cc0000; }
+    .modal {
+      display: none; 
+      position: fixed;
+      z-index: 2000; 
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background: #1a1a1a; color: white;
+      margin: 10% auto; padding: 20px;
+      border-radius: 12px; width: 90%; max-width: 400px;
+      text-align: left;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.8);
+      animation: slideDown 0.4s ease;
+    }
+    .modal-content a { color: #ff3333; text-decoration: none; }
+    .modal-content a:hover { text-decoration: underline; }
+    .close {
+      color: #ff3333; float: right;
+      font-size: 24px; font-weight: bold; cursor: pointer;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -149,15 +147,16 @@
       <a href="index.html">หน้าหลัก</a>
       <a href="shop.html">สินค้า</a>
       <a href="topup.html">เติมเงิน</a>
-      <a href="contact.html">ติดต่อเรา</a>
+      <a href="#" onclick="openContact()">ติดต่อเรา</a>
     </div>
     <div class="right">
       <div class="dropdown">
         <button class="dropbtn">โปรไฟล์ ▼</button>
-        <div class="dropdown-content">
+        <div class="dropdown-content" id="profileMenu">
           <a href="profile.html">จัดการบัญชี</a>
           <a href="purchase-history.html">ประวัติซื้อสินค้า</a>
           <a href="topup-history.html">ประวัติการเติมเงิน</a>
+          <!-- เมนู Admin จะถูกเพิ่มด้วย JS -->
           <a href="#" onclick="logout()">ออกจากระบบ</a>
         </div>
       </div>
@@ -168,14 +167,24 @@
   <div class="main">
     <img class="logo" src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NGVidDRwYmhya2Q4eTExdm5kNWs4cmF5bXR6bWQ4aW81YW9yYmV5ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/aPoWIEaPPoCXpzelGV/giphy.gif" alt="Logo">
     <h1>ยินดีต้อนรับสู่ Mawnam Studio</h1>
-
     <div class="status-box">
       <h2>Mawnam Studio</h2>
       <p>เปิดให้บริการมาแล้ว</p>
       <div class="status" id="uptime"></div>
     </div>
-
     <a href="#" class="btn-category">หมวดหมู่แนะนำ ></a>
+  </div>
+
+  <!-- Modal ติดต่อเรา -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeContact()">&times;</span>
+      <h2>ช่องทางการติดต่อ</h2>
+      <p>📞 โทร: <a href="tel:0123456789">012-345-6789</a></p>
+      <p>💬 Line: <a href="https://line.me/ti/p/yourlineid" target="_blank">@yourlineid</a></p>
+      <p>📧 Email: <a href="mailto:mawnam@example.com">mawnam@example.com</a></p>
+      <p>🌐 Facebook: <a href="https://facebook.com/yourpage" target="_blank">Mawnam Studio</a></p>
+    </div>
   </div>
 
   <!-- ดาวตก -->
@@ -190,14 +199,26 @@
       window.location.href = "index.html";
     }
 
-    // ตัวนับเวลา uptime
-    const startTime = new Date("2024-05-01T00:00:00"); // กำหนดวันเริ่มเปิด
-    const uptimeDiv = document.getElementById("uptime");
+    // Modal
+    function openContact() {
+      document.getElementById("contactModal").style.display = "block";
+    }
+    function closeContact() {
+      document.getElementById("contactModal").style.display = "none";
+    }
+    window.onclick = function(event) {
+      const modal = document.getElementById("contactModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
 
+    // uptime
+    const startTime = new Date("2024-05-01T00:00:00"); 
+    const uptimeDiv = document.getElementById("uptime");
     function updateUptime() {
       const now = new Date();
       let diff = Math.floor((now - startTime) / 1000);
-
       const years = Math.floor(diff / (3600*24*365)); diff %= 3600*24*365;
       const months = Math.floor(diff / (3600*24*30)); diff %= 3600*24*30;
       const weeks = Math.floor(diff / (3600*24*7)); diff %= 3600*24*7;
@@ -205,7 +226,6 @@
       const hours = Math.floor(diff / 3600); diff %= 3600;
       const minutes = Math.floor(diff / 60);
       const seconds = diff % 60;
-
       uptimeDiv.innerHTML = `
         📅 ปี: ${years} &nbsp;
         📅 เดือน: ${months} &nbsp;
@@ -218,6 +238,16 @@
     }
     setInterval(updateUptime, 1000);
     updateUptime();
+
+    // ===== เพิ่มเมนู Admin ถ้าเป็นแอดมิน =====
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && currentUser.role === "admin") {
+      const profileMenu = document.getElementById("profileMenu");
+      const adminLink = document.createElement("a");
+      adminLink.href = "admin.html";
+      adminLink.textContent = "เมนูแอดมิน";
+      profileMenu.insertBefore(adminLink, profileMenu.lastElementChild); // แทรกก่อน "ออกจากระบบ"
+    }
   </script>
 </body>
 </html>
