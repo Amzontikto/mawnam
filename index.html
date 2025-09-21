@@ -116,4 +116,40 @@
     <button class="btn btn-guest" onclick="window.location.href='index2.html'">🛒 เยี่ยมชมสินค้า</button>
   </div>
 </body>
+<button id="musicBtn" onclick="toggleMusic()" 
+  style="position: fixed; bottom: 20px; right: 20px; 
+         background: red; color: white; border: none; 
+         border-radius: 50%; width: 50px; height: 50px; font-size: 20px;">
+  🎵
+</button>
+<!-- ปุ่มเพลง -->
+<button id="musicBtn" onclick="toggleMusic()" 
+  style="position: fixed; bottom: 20px; right: 20px; 
+         background: red; color: white; border: none; 
+         border-radius: 50%; width: 50px; height: 50px; font-size: 20px;">
+  🎵
+</button>
+
+<script>
+  let audio = new Audio("music.mp3"); // ✅ ใช้ชื่อไฟล์ตรงๆ
+  audio.loop = true;
+  audio.volume = 0.5;
+  let isPlaying = false;
+
+  function toggleMusic() {
+    if (!isPlaying) {
+      audio.play().then(() => {
+        isPlaying = true;
+        document.getElementById("musicBtn").textContent = "⏸";
+      }).catch(err => {
+        alert("❌ เพลงเล่นไม่ได้ ลองเช็คไฟล์ music.mp3 ว่าอยู่โฟลเดอร์เดียวกันมั้ย");
+        console.error(err);
+      });
+    } else {
+      audio.pause();
+      isPlaying = false;
+      document.getElementById("musicBtn").textContent = "🎵";
+    }
+  }
+</script>
 </html>
