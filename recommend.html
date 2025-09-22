@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หมวดหมู่แนะนำ - Mawnam Studio</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow-x: hidden;
+      text-align: center;
+      position: relative;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle, #ff0000, #000000 80%);
+      background-size: 200% 200%;
+      animation: waterflow 8s ease infinite;
+      z-index: -2;
+    }
+    @keyframes waterflow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 30px;
+      background: rgba(0,0,0,0.3);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+    }
+    .navbar .left { display: flex; align-items: center; gap: 15px; }
+    .navbar img { width: 40px; height: 40px; border-radius: 50%; }
+    .navbar a {
+      color: white; text-decoration: none; font-weight: bold;
+      transition: color 0.3s;
+    }
+    .navbar a:hover { color: #ff3333; }
+    .navbar .right { display: flex; align-items: center; gap: 15px; }
+    .dropdown { position: relative; display: inline-block; }
+    .dropbtn {
+      background: #990000; color: white;
+      padding: 8px 16px; border: none;
+      border-radius: 6px; cursor: pointer;
+      font-weight: bold;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute; right: 0;
+      background: rgba(20,20,20,0.95);
+      min-width: 200px; border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.6);
+      z-index: 1001;
+    }
+    .dropdown-content a {
+      display: block; padding: 12px;
+      color: red; text-decoration: none;
+      border-bottom: 1px solid #333;
+    }
+    .dropdown-content a:last-child { border-bottom: none; }
+    .dropdown-content a:hover { background: #330000; }
+    .dropdown:hover .dropdown-content { display: block; }
+
+    .main { margin-top: 70px; padding: 40px; }
+    h1 { font-size: 28px; font-weight: bold; margin-bottom: 30px; color: #ff3333; }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .product {
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.7);
+    }
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .product h3 {
+      margin: 10px 0;
+      color: #ff6666;
+    }
+    .product p {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .product button {
+      background: #ff0000;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .product button:hover {
+      background: #cc0000;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #ff6666;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ปุ่มเพลง */
+    #musicControl {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+    #musicControl button {
+      background: #ff0000;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.5);
+    }
+    #musicControl button:hover {
+      background: #cc0000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NGVidDRwYmhya2Q4eTExdm5kNWs4cmF5bXR6bWQ4aW81YW9yYmV5ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/aPoWIEaPPoCXpzelGV/giphy.gif" alt="profile">
+      <a href="index.html">หน้าหลัก</a>
+      <a href="shop.html">สินค้า</a>
+      <a href="topup.html">เติมเงิน</a>
+      <a href="contact.html">ติดต่อเรา</a>
+    </div>
+    <div class="right">
+      <div class="dropdown">
+        <button class="dropbtn">โปรไฟล์ ▼</button>
+        <div class="dropdown-content" id="profileMenu">
+          <a href="profile.html">จัดการบัญชี</a>
+          <a href="purchase-history.html">ประวัติซื้อสินค้า</a>
+          <a href="topup-history.html">ประวัติการเติมเงิน</a>
+          <a href="#" onclick="logout()">ออกจากระบบ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>สินค้าแนะนำ</h1>
+    <div class="product-grid">
+      <div class="product">
+        <img src="https://via.placeholder.com/200x150" alt="สินค้า1">
+        <h3>สินค้าแนะนำ 1</h3>
+        <p>รายละเอียดสั้นๆ ของสินค้า</p>
+        <button>ซื้อเลย</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200x150" alt="สินค้า2">
+        <h3>สินค้าแนะนำ 2</h3>
+        <p>รายละเอียดสั้นๆ ของสินค้า</p>
+        <button>ซื้อเลย</button>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200x150" alt="สินค้า3">
+        <h3>สินค้าแนะนำ 3</h3>
+        <p>รายละเอียดสั้นๆ ของสินค้า</p>
+        <button>ซื้อเลย</button>
+      </div>
+    </div>
+    <a href="index.html" class="back-link">⬅ กลับหน้าหลัก</a>
+  </div>
+
+  <!-- ปุ่มเพลง -->
+  <div id="musicControl">
+    <button onclick="toggleMusic()">🎵 เพลง</button>
+  </div>
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+    เบราว์เซอร์ของคุณไม่รองรับการเล่นเพลง
+  </audio>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("currentUser");
+      alert("ออกจากระบบแล้ว");
+      window.location.href = "index.html";
+    }
+
+    // ===== เพิ่มเมนู Admin ถ้าเป็นแอดมิน =====
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && currentUser.role === "admin") {
+      const profileMenu = document.getElementById("profileMenu");
+      const adminLink = document.createElement("a");
+      adminLink.href = "admin.html";
+      adminLink.textContent = "เมนูแอดมิน";
+      profileMenu.insertBefore(adminLink, profileMenu.lastElementChild);
+    }
+
+    // ===== ปุ่มเพลง =====
+    const music = document.getElementById("bgMusic");
+    let isPlaying = false;
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+      } else {
+        music.play();
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
+</body>
+</html>
