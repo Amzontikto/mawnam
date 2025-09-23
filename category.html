@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>หมวดหมู่แนะนำ - Mawnam Studio</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      background: radial-gradient(circle, #ff0000, #000000 80%);
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 30px;
+      background: rgba(0,0,0,0.3);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+    }
+    .navbar .left { display: flex; align-items: center; gap: 15px; }
+    .navbar img { width: 40px; height: 40px; border-radius: 50%; }
+    .navbar a {
+      color: white; text-decoration: none; font-weight: bold;
+      transition: color 0.3s;
+    }
+    .navbar a:hover { color: #ff3333; }
+    .navbar .right { display: flex; align-items: center; gap: 15px; }
+
+    /* Main */
+    h1 {
+      font-size: 48px;
+      font-weight: bold;
+      color: #ff3333;
+      margin: 50px 0 40px 0;
+    }
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    /* Category Box */
+    .category {
+      background: rgba(0,0,0,0.7);
+      border: 3px solid #ff0000;
+      border-radius: 20px;
+      padding: 40px 30px;
+      width: 280px;
+      transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255,0,0,0.2);
+    }
+    .category::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+      z-index: -1;
+      transition: transform 0.6s ease;
+    }
+    .category:hover {
+      transform: translateY(-12px) scale(1.05);
+      background: rgba(255,0,0,0.2);
+      box-shadow: 0 0 25px rgba(255,0,0,0.8),
+                  0 0 40px rgba(255,50,50,0.6);
+    }
+    .category:hover::before {
+      transform: scale(1.15);
+    }
+    .category img.cat-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+      z-index: 1;
+      position: relative;
+    }
+    .category h2 {
+      font-size: 22px;
+      color: #ff3333;
+      margin-bottom: 10px;
+    }
+    .category p {
+      font-size: 16px;
+      color: #ddd;
+    }
+
+    /* ดาวตก */
+    .shooting-star {
+      position: fixed;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(white, transparent);
+      top: -100px;
+      animation: shooting 4s linear infinite;
+      opacity: 0.4;
+      z-index: -1;
+    }
+    @keyframes shooting {
+      0% { transform: translate(0,0) rotate(45deg); opacity:0; }
+      10% { opacity:1; }
+      100% { transform: translate(400px,400px) rotate(45deg); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <img src="https://media.giphy.com/media/aPoWIEaPPoCXpzelGV/giphy.gif" alt="profile">
+      <a href="index.html">หน้าหลัก</a>
+      <a href="shop.html">สินค้า</a>
+      <a href="topup.html">เติมเงิน</a>
+      <a href="contact.html">ติดต่อเรา</a>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <h1>หมวดหมู่แนะนำ</h1>
+  <div class="categories">
+    <div class="category">
+      <img src="https://img.icons8.com/color/96/controller.png" class="cat-icon" alt="เกม">
+      <h2>🎮 เกมยอดนิยม</h2>
+      <p>เกมที่ผู้เล่นชอบมากที่สุด</p>
+    </div>
+    <div class="category">
+      <img src="https://img.icons8.com/color/96/shopping-cart.png" class="cat-icon" alt="สินค้า">
+      <h2>🛒 สินค้าขายดี</h2>
+      <p>ของที่ถูกซื้อมากที่สุด</p>
+    </div>
+    <div class="category">
+      <img src="https://img.icons8.com/color/96/sale.png" class="cat-icon" alt="โปรโมชัน">
+      <h2>✨ โปรโมชันพิเศษ</h2>
+      <p>ดีลเด็ดราคาถูกสุดคุ้ม</p>
+    </div>
+  </div>
+
+  <!-- ดาวตก -->
+  <div class="shooting-star" style="left:10%; animation-delay:0s;"></div>
+  <div class="shooting-star" style="left:40%; animation-delay:2s;"></div>
+  <div class="shooting-star" style="left:70%; animation-delay:4s;"></div>
+</body>
+</html>
