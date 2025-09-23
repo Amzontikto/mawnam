@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>โปรโมชันพิเศษ - Mawnam Studio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 { color: #ff3333; margin-bottom: 40px; }
+    .products {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .product {
+      background: rgba(0,0,0,0.6);
+      border: 2px solid #ff0000;
+      border-radius: 15px;
+      padding: 20px;
+      width: 220px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(255,0,0,0.7);
+    }
+    .product img { width: 100px; margin-bottom: 15px; }
+    .product h3 { color: #ff3333; margin-bottom: 10px; }
+    .product p { margin-bottom: 10px; }
+    .product button {
+      background: #ff0000;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .product button:hover { background: #cc0000; }
+  </style>
+</head>
+<body>
+  <h1>✨ โปรโมชันพิเศษ</h1>
+  
+  <div class="products">
+    <div class="product">
+      <img src="https://img.icons8.com/color/96/discount.png" alt="Sale 50%">
+      <h3>ลด 50% - Gaming Mouse</h3>
+      <p>ราคา: 500 บาท → <b>250 บาท</b></p>
+      <button>ซื้อเลย</button>
+    </div>
+    <div class="product">
+      <img src="https://img.icons8.com/color/96/discount.png" alt="Sale 30%">
+      <h3>ลด 30% - Keyboard RGB</h3>
+      <p>ราคา: 1,500 บาท → <b>1,050 บาท</b></p>
+      <button>ซื้อเลย</button>
+    </div>
+  </div>
+  
+  <p style="margin-top:40px;">
+    <a href="category.html" style="color:red;">⬅ กลับไปหน้าหมวดหมู่</a>
+  </p>
+</body>
+</html>
